@@ -1,26 +1,16 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { useColorMode, Button, Flex, Text } from '@chakra-ui/react';
+import { useTranslation } from 'react-i18next';
 
-function App() {
+const App = () => {
+  const { colorMode, toggleColorMode } = useColorMode();
+  const { t } = useTranslation();
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Flex w="100%" h="100vh" justifyContent="center" alignItems="center" flexDirection="column">
+      <Button onClick={toggleColorMode}>{colorMode === 'light' ? 'Dark' : 'Light'}</Button>
+      <Text mt={5}>{t('INVOICES')}</Text>
+    </Flex>
   );
-}
+};
 
 export default App;
