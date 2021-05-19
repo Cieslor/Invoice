@@ -9,6 +9,9 @@ const App = () => {
     <Flex w="100%" h="100vh" justifyContent="center" alignItems="center" flexDirection="column">
       <Button onClick={toggleColorMode}>{colorMode === 'light' ? 'Dark' : 'Light'}</Button>
       <Text mt={5}>{t('INVOICES')}</Text>
+      <Text as="h1" textStyle="h1" color="invoice.redSalsa">
+        Hello
+      </Text>
     </Flex>
   );
 };

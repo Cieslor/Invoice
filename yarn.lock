@@ -1873,6 +1873,11 @@
     minimatch "^3.0.4"
     strip-json-comments "^3.1.1"
 
+"@fontsource/spartan@^4.3.0":
+  version "4.3.0"
+  resolved "https://registry.yarnpkg.com/@fontsource/spartan/-/spartan-4.3.0.tgz#4a7e6e64d8fff14ff24f6fc9226966390388ffd9"
+  integrity sha512-8ZOeR/QIGYFRD96JSJZZUjlck2TSRcYHDk+3JFo7WchN1xqS3xq/78mXK040VwwipelqI4JpLI0BzPr2BZYlOA==
+
 "@hapi/address@2.x.x":
   version "2.1.4"
   resolved "https://registry.yarnpkg.com/@hapi/address/-/address-2.1.4.tgz#5d67ed43f3fd41a69d4b9ff7b56e7c0d1d0a81e5"
