@@ -1,10 +1,10 @@
-import React from "react";
-import ReactDOM from "react-dom";
-import { ChakraProvider, ColorModeScript } from "@chakra-ui/react";
-import { theme } from "src/helpers";
-import "./i18n/config";
-import "./index.css";
-import App from "./App";
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { ChakraProvider, ColorModeScript } from '@chakra-ui/react';
+import { theme } from 'src/helpers';
+import './i18n/config.ts';
+import './index.css';
+import App from './App';
 
 ReactDOM.render(
   <React.StrictMode>
@@ -13,5 +13,5 @@ ReactDOM.render(
       <App />
     </ChakraProvider>
   </React.StrictMode>,
-  document.getElementById("root")
+  document.getElementById('root')
 );
