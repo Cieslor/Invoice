@@ -1,5 +1,18 @@
 import React from 'react';
-import { useColorMode, Button, Flex, Text, HStack, Icon, Box } from '@chakra-ui/react';
+import {
+  useColorMode,
+  Button,
+  Flex,
+  Text,
+  HStack,
+  Icon,
+  Box,
+  VStack,
+  FormControl,
+  FormLabel,
+  Input,
+  FormErrorMessage,
+} from '@chakra-ui/react';
 import { useTranslation } from 'react-i18next';
 import { AiFillPlusCircle } from 'react-icons/ai';
 
@@ -26,6 +39,22 @@ const App = () => {
           </Button>
         </Box>
       </HStack>
+      <VStack spacing={4} mt={5}>
+        <FormControl id="user-name" w="200px">
+          <Flex justifyContent="space-between">
+            <FormLabel>Name</FormLabel>
+            <FormErrorMessage>Invalid</FormErrorMessage>
+          </Flex>
+          <Input size="md" />
+        </FormControl>
+        <FormControl id="user-name" w="200px" isInvalid>
+          <Flex justifyContent="space-between">
+            <FormLabel>Name</FormLabel>
+            <FormErrorMessage>Invalid</FormErrorMessage>
+          </Flex>
+          <Input size="md" />
+        </FormControl>
+      </VStack>
     </Flex>
   );
 };

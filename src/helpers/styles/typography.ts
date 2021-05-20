@@ -1,4 +1,5 @@
 import '@fontsource/spartan/500.css';
+import '@fontsource/spartan/600.css';
 import '@fontsource/spartan/700.css';
 
 export const textStyles = {
