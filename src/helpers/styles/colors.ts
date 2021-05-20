@@ -12,5 +12,7 @@ export const colors = {
     cultured: '#F8F8FB',
     xiketic: '#141625',
     richBlack: '#0C0E16',
+    selago: '#F9FAFE',
+    oxfordBlue: '#373B53',
   },
 };

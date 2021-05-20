@@ -1,5 +1,5 @@
 import { extendTheme, DeepPartial, ThemeConfig } from '@chakra-ui/react';
-import { colors, fonts, textStyles } from 'helpers';
+import { colors, fonts, textStyles, Button } from 'helpers';
 
 const config: DeepPartial<ThemeConfig> = {
   initialColorMode: 'light',
@@ -11,4 +11,7 @@ export const theme = extendTheme({
   colors,
   fonts,
   textStyles,
+  components: {
+    Button,
+  },
 });
