@@ -15,6 +15,7 @@ import {
 } from '@chakra-ui/react';
 import { useTranslation } from 'react-i18next';
 import { AiFillPlusCircle } from 'react-icons/ai';
+import { CustomSelect } from 'components';
 
 const App = () => {
   const { colorMode, toggleColorMode } = useColorMode();
@@ -33,27 +34,47 @@ const App = () => {
         <Button variant="secondary">Edit</Button>
         <Button variant="action">Save as draft</Button>
         <Button variant="action-red">Delete</Button>
-        <Box w="200px">
+        <Box w="220px">
           <Button variant="action-light" size="long">
             + Add new item
           </Button>
         </Box>
       </HStack>
       <VStack spacing={4} mt={5}>
-        <FormControl id="user-name" w="200px">
+        <FormControl id="user-name-invalid" w="220px" isInvalid>
           <Flex justifyContent="space-between">
             <FormLabel>Name</FormLabel>
             <FormErrorMessage>Invalid</FormErrorMessage>
           </Flex>
-          <Input size="md" />
+          <Input size="md" placeholder="test" />
         </FormControl>
-        <FormControl id="user-name" w="200px" isInvalid>
+        <FormControl id="user-name" w="220px">
           <Flex justifyContent="space-between">
-            <FormLabel>Name</FormLabel>
+            <FormLabel>Project Description</FormLabel>
             <FormErrorMessage>Invalid</FormErrorMessage>
           </Flex>
-          <Input size="md" />
+          <Input size="md" placeholder="e.g. Graphic Design System" />
         </FormControl>
+        <CustomSelect
+          label="Payment Terms"
+          options={[
+            { value: 'chocolate', label: 'Chocolate' },
+            { value: 'strawberry', label: 'Strawberry' },
+            { value: 'vanilla', label: 'Vanilla' },
+          ]}
+          onChange={(value) => console.log(value)}
+        />
+        <CustomSelect
+          label="Payment Terms"
+          options={[
+            { value: 'chocolate', label: 'Chocolate' },
+            { value: 'strawberry', label: 'Strawberry' },
+            { value: 'vanilla', label: 'Vanilla' },
+          ]}
+          isInvalid
+          errorText="required"
+          onChange={(value) => console.log(value)}
+        />
       </VStack>
     </Flex>
   );

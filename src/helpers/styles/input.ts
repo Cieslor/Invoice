@@ -24,9 +24,18 @@ export const Input = {
         color: colorMode === 'dark' ? 'white' : 'invoice.richBlack',
         _focus: {
           borderColor: colorMode === 'dark' ? 'invoice.ebonyClay' : 'invoice.mediumPurple',
+          boxShadow: 'none',
+        },
+        _hover: {
+          borderColor: colorMode === 'dark' ? 'invoice.ebonyClay' : 'invoice.mediumPurple',
         },
         _invalid: {
           borderColor: 'invoice.redSalsa',
+          boxShadow: 'none',
+        },
+        _placeholder: {
+          color: colorMode === 'dark' ? 'white' : 'invoice.richBlack',
+          opacity: colorMode === 'dark' ? 1 : 0.4,
         },
       },
     }),
