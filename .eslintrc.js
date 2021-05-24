@@ -3,21 +3,22 @@ module.exports = {
     browser: true,
     es2021: true,
   },
-  extends: [
-    "plugin:react/recommended",
-    "google",
-    "plugin:prettier/recommended",
-  ],
-  parser: "@typescript-eslint/parser",
+  extends: ['plugin:react/recommended', 'google', 'plugin:prettier/recommended'],
+  parser: '@typescript-eslint/parser',
   parserOptions: {
+    ecmaVersion: 2020,
+    sourceType: 'module',
     ecmaFeatures: {
       jsx: true,
+      arrowFunctions: true,
     },
-    ecmaVersion: 12,
-    sourceType: "module",
+    tsconfigRootDir: __dirname,
+    project: ['./tsconfig.json'],
   },
-  plugins: ["react", "@typescript-eslint", "prettier"],
+  ignorePatterns: ['.eslintrc.js'],
+  plugins: ['react', '@typescript-eslint', 'prettier'],
   rules: {
-    "prettier/prettier": "error",
+    'prettier/prettier': 'error',
+    'react/prop-types': 0,
   },
 };
