@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { ChakraProvider, ColorModeScript } from '@chakra-ui/react';
+import { RecoilRoot } from 'recoil';
 import { theme } from 'helpers';
 import './i18n/config.ts';
 import './index.css';
@@ -10,7 +11,9 @@ ReactDOM.render(
   <React.StrictMode>
     <ColorModeScript initialColorMode={theme.config.initialColorMode} />
     <ChakraProvider resetCSS theme={theme}>
-      <App />
+      <RecoilRoot>
+        <App />
+      </RecoilRoot>
     </ChakraProvider>
   </React.StrictMode>,
   document.getElementById('root')

@@ -1,5 +1,7 @@
+import { useColorModeValue } from '@chakra-ui/react';
+
 export const customSelectStyles = (
-  colorMode: string,
+  colorModeValue: typeof useColorModeValue,
   colors: { [key: string]: string },
   isInvalid: boolean = false
 ) => ({
@@ -9,20 +11,13 @@ export const customSelectStyles = (
   }),
   control: (provided: { [key: string]: string }) => ({
     ...provided,
-    backgroundColor: colorMode === 'dark' ? colors.spaceCadet : 'white',
+    backgroundColor: colorModeValue('white', colors.spaceCadet),
     borderRadius: '0.25rem',
     borderWidth: '1px',
-    borderColor: isInvalid
-      ? `${colors.redSalsa} !important`
-      : colorMode === 'dark'
-      ? colors.ebonyClay
-      : colors.lawenderWeb,
+    borderColor: isInvalid ? `${colors.redSalsa} !important` : colorModeValue(colors.lawenderWeb, colors.ebonyClay),
     cursor: 'pointer',
-    '&:hover': {
-      borderColor: colorMode === 'dark' ? colors.ebonyClay : colors.mediumPurple,
-    },
-    '&:focus': {
-      borderColor: colorMode === 'dark' ? colors.ebonyClay : colors.mediumPurple,
+    '&:hover, &:focus': {
+      borderColor: colorModeValue(colors.mediumPurple, colors.ebonyClay),
     },
   }),
   valueContainer: (provided: { [key: string]: string }) => ({
@@ -37,7 +32,7 @@ export const customSelectStyles = (
     ...provided,
     fontWeight: 700,
     margin: 0,
-    color: colorMode === 'dark' ? 'white' : colors.richBlack,
+    color: colorModeValue(colors.richBlack, 'white'),
   }),
   input: () => ({
     padding: 0,
@@ -47,9 +42,9 @@ export const customSelectStyles = (
   }),
   placeholder: (provided: { [key: string]: string }) => ({
     ...provided,
-    color: colorMode === 'dark' ? 'white' : colors.richBlack,
+    color: colorModeValue(colors.richBlack, 'white'),
     fontWeight: 700,
-    opacity: colorMode === 'dark' ? 1 : 0.4,
+    opacity: colorModeValue(0.4, 1),
   }),
   indicatorSeparator: () => ({
     display: 'none',
@@ -63,9 +58,9 @@ export const customSelectStyles = (
   }),
   menu: (provided: { [key: string]: string }) => ({
     ...provided,
-    backgroundColor: colorMode === 'dark' ? colors.ebonyClay : 'white',
+    backgroundColor: colorModeValue('white', colors.ebonyClay),
     borderRadius: '0.5rem',
-    boxShadow: colorMode === 'dark' ? '0px 10px 20px rgba(0, 0, 0, 0.25)' : '0px 10px 20px rgba(72, 84, 159, 0.25)',
+    boxShadow: colorModeValue('0px 10px 20px rgba(72, 84, 159, 0.25)', '0px 10px 20px rgba(0, 0, 0, 0.25)'),
     overflow: 'hidden',
   }),
   menuList: (provided: { [key: string]: string }) => ({
@@ -75,26 +70,21 @@ export const customSelectStyles = (
   option: (provided: { [key: string]: string }, state: { isSelected: boolean }) => ({
     ...provided,
     padding: '1rem 1.25rem',
-    color:
-      colorMode === 'dark'
-        ? state.isSelected
-          ? colors.mediumPurple
-          : colors.lawenderWeb
-        : state.isSelected
-        ? colors.mediumSlateBlue
-        : colors.richBlack,
+    color: state.isSelected
+      ? colorModeValue(colors.mediumSlateBlue, colors.mediumPurple)
+      : colorModeValue(colors.richBlack, colors.lawenderWeb),
     fontSize: '0.75rem',
     fontWeight: 700,
     lineHeight: '1.25em',
     letterSpacing: '-0.25px',
-    backgroundColor: colorMode === 'dark' ? colors.ebonyClay : 'white',
+    backgroundColor: colorModeValue('white', 'invoice.ebonyClay'),
     cursor: 'pointer',
     '&:hover': {
-      color: colorMode === 'dark' ? colors.mediumPurple : colors.mediumSlateBlue,
-      backgroundColor: colorMode === 'dark' ? colors.ebonyClay : 'white',
+      color: colorModeValue(colors.mediumSlateBlue, colors.mediumPurple),
+      backgroundColor: colorModeValue('white', colors.ebonyClay),
     },
     '&:not(:last-child)': {
-      borderBottom: `1px solid ${colorMode === 'dark' ? colors.spaceCadet : colors.lavenderWeb}`,
+      borderBottom: `1px solid ${colorModeValue(colors.lavenderWeb, colors.spaceCadet)}`,
     },
   }),
 });

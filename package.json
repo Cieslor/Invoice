@@ -6,6 +6,7 @@
     "@chakra-ui/react": "^1.6.2",
     "@emotion/react": "11",
     "@emotion/styled": "11",
+    "@firebase/auth-types": "^0.10.3",
     "@fontsource/spartan": "^4.3.0",
     "@hookform/resolvers": "^2.5.1",
     "@testing-library/jest-dom": "^5.11.4",
@@ -27,8 +28,10 @@
     "react-hook-form": "^7.6.0",
     "react-i18next": "^11.8.15",
     "react-icons": "^4.2.0",
+    "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3",
     "react-select": "^4.3.1",
+    "recoil": "^0.3.1",
     "typescript": "^4.1.2",
     "web-vitals": "^1.0.1",
     "yup": "^0.32.9"
@@ -60,6 +63,7 @@
   "devDependencies": {
     "@chakra-ui/cli": "^1.3.1",
     "@types/react-datepicker": "^3.1.8",
+    "@types/react-router-dom": "^5.1.7",
     "@types/react-select": "^4.0.15",
     "@typescript-eslint/eslint-plugin": "^4.24.0",
     "@typescript-eslint/parser": "^4.24.0",

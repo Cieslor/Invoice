@@ -11,10 +11,11 @@ import {
   FormErrorMessage,
   Button,
   Flex,
-  useColorMode,
+  useColorModeValue,
   Text,
 } from '@chakra-ui/react';
 import { signUpYupSchema } from 'components';
+import { createUser } from 'firebaseAPI';
 
 interface ISignUpFormData {
   email: string;
@@ -37,9 +38,12 @@ export const SignUp: FC = () => {
     },
     mode: 'onSubmit',
   });
-  const { colorMode } = useColorMode();
 
-  const onSubmit = (data: ISignUpFormData) => console.log(data);
+  const onSubmit = async (data: ISignUpFormData) => {
+    const { email, password } = data;
+    console.log(email, password);
+    await createUser(email, password).catch((error) => console.log(error));
+  };
 
   return (
     <Box
@@ -47,10 +51,10 @@ export const SignUp: FC = () => {
       maxW="420px"
       borderRadius="0.5rem"
       p={10}
-      backgroundColor={colorMode === 'dark' ? 'invoice.spaceCadet' : 'white'}
+      backgroundColor={useColorModeValue('white', 'invoice.spaceCadet')}
       textAlign="center"
     >
-      <Text as="h2" textStyle="h2" color={colorMode === 'dark' ? 'white' : 'invoice.richBlack'} mb={6}>
+      <Text as="h2" textStyle="h2" color={useColorModeValue('invoice.richBlack', 'white')} mb={6}>
         {t('CREATE_ACCOUNT')}
       </Text>
       <form onSubmit={handleSubmit(onSubmit)}>

@@ -1,21 +1,26 @@
 import React from 'react';
-import { Flex, useColorMode } from '@chakra-ui/react';
-import { SignUp } from 'components';
+import { Box, useColorModeValue } from '@chakra-ui/react';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { useRecoilValue } from 'recoil';
+import { isUserLoaded } from 'state';
+import { useAuthStateChanged } from 'firebaseAPI';
+import { SignUpView } from 'views';
 
 const App = () => {
-  const { colorMode } = useColorMode();
+  const isLoaded = useRecoilValue(isUserLoaded);
+
+  useAuthStateChanged();
+
   return (
-    <Flex
-      w="100%"
-      h="100vh"
-      justifyContent="center"
-      alignItems="center"
-      flexDirection="column"
-      overflowY="auto"
-      backgroundColor={colorMode === 'dark' ? 'invoice.xiketic' : 'invoice.cultured'}
-    >
-      <SignUp />
-    </Flex>
+    <Box w="100%" h="100vh" backgroundColor={useColorModeValue('invoice.cultured', 'invoice.xiketic')}>
+      <Router>
+        {isLoaded && (
+          <Switch>
+            <Route path="/signup" component={SignUpView} />
+          </Switch>
+        )}
+      </Router>
+    </Box>
   );
 };
 
