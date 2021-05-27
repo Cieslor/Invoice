@@ -17,30 +17,28 @@ import {
 } from '@chakra-ui/react';
 import { useHistory, Link } from 'react-router-dom';
 import { useSetRecoilState } from 'recoil';
-import { signUpYupSchema } from 'components';
-import { createUser } from 'firebaseAPI';
+import { signInYupSchema } from 'components';
+import { signIn } from 'firebaseAPI';
 import { SignInAndUpResponse } from 'models';
 import { currentUser } from 'state';
 
-interface ISignUpFormData {
+interface ISignInFormData {
   email: string;
   password: string;
-  confirmPassword: string;
 }
 
-export const SignUp: FC = () => {
-  const { t } = useTranslation('SignUp');
+export const SignIn: FC = () => {
+  const { t } = useTranslation('SignIn');
 
   const {
     register,
     handleSubmit,
     formState: { errors, isSubmitting },
-  } = useForm<ISignUpFormData>({
-    resolver: yupResolver(signUpYupSchema(t)),
+  } = useForm<ISignInFormData>({
+    resolver: yupResolver(signInYupSchema),
     defaultValues: {
       email: '',
       password: '',
-      confirmPassword: '',
     },
     mode: 'onSubmit',
   });
@@ -49,9 +47,9 @@ export const SignUp: FC = () => {
 
   const setCurrentUser = useSetRecoilState(currentUser);
 
-  const onSubmit = async (data: ISignUpFormData) => {
+  const onSubmit = async (data: ISignInFormData) => {
     const { email, password } = data;
-    await createUser(email, password)
+    await signIn(email, password)
       .then((data: SignInAndUpResponse) => {
         setCurrentUser(data.user);
         history.push('/');
@@ -71,7 +69,7 @@ export const SignUp: FC = () => {
       textAlign="center"
     >
       <Text as="h2" textStyle="h2" color={useColorModeValue('invoice.richBlack', 'white')} mb={6}>
-        {t('CREATE_ACCOUNT')}
+        {t('SIGN_IN')}
       </Text>
       <form onSubmit={handleSubmit(onSubmit)}>
         <VStack spacing={5}>
@@ -89,21 +87,14 @@ export const SignUp: FC = () => {
             </Flex>
             <Input type="password" {...register('password')} />
           </FormControl>
-          <FormControl id="confirmPassword" isInvalid={!!errors.confirmPassword?.message}>
-            <Flex justifyContent="space-between">
-              <FormLabel>{t('CONFIRM_PASSWORD')}</FormLabel>
-              <FormErrorMessage>{errors?.confirmPassword?.message}</FormErrorMessage>
-            </Flex>
-            <Input type="password" {...register('confirmPassword')} />
-          </FormControl>
           <Text textStyle="body_1">
-            {t('ALREADY_HAVE_ACCOUNT')}
-            <ChakraLink as={Link} to="/signin" ml={2} fontWeight="700">
-              {t('SIGN_IN')}
+            {t('DONT_HAVE_ACCOUNT')}
+            <ChakraLink as={Link} to="/signup" ml={2} fontWeight="700">
+              {t('SIGN_UP')}
             </ChakraLink>
           </Text>
           <Button type="submit" variant="primary" isLoading={isSubmitting}>
-            {t('SIGNUP')}
+            {t('SIGN_IN')}
           </Button>
         </VStack>
       </form>

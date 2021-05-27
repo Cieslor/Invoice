@@ -5,6 +5,7 @@ import LanguageDetector from 'i18next-browser-languagedetector';
 import Common from './en/common.json';
 import Validation from './en/validation.json';
 import SignUp from './en/signUp.json';
+import SignIn from './en/signIn.json';
 import { buildYupLocale } from 'i18n';
 
 export const resources = {
@@ -12,6 +13,7 @@ export const resources = {
     Common,
     Validation,
     SignUp,
+    SignIn,
   },
 } as const;
 
@@ -23,7 +25,7 @@ i18n
     {
       lng: 'en',
       fallbackLng: 'en',
-      ns: ['Common', 'Validation', 'SignUp'],
+      ns: ['Common', 'Validation', 'SignUp', 'SignIn'],
       defaultNS: 'Common',
       debug: false,
       interpolation: {
