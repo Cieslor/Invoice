@@ -3,5 +3,10 @@
   "EMAIL": "Email",
   "PASSWORD": "Password",
   "SIGN_UP": "Sign up",
-  "DONT_HAVE_ACCOUNT": "Don't have an account yet?"
+  "DONT_HAVE_ACCOUNT": "Don't have an account yet?",
+  "ERROR": {
+    "auth/wrong-password": "The password is invalid",
+    "auth/user-not-found": "User with given email does not exist",
+    "GENERIC": "An error occurred while logging in, please try again"
+  }
 }

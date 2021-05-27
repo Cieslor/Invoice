@@ -1,5 +1,5 @@
-import React, { FC } from 'react';
-import { useTranslation } from 'react-i18next';
+import React, { FC, useState } from 'react';
+import { useTranslation, TFuncKey } from 'react-i18next';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import {
@@ -17,7 +17,7 @@ import {
 } from '@chakra-ui/react';
 import { useHistory, Link } from 'react-router-dom';
 import { useSetRecoilState } from 'recoil';
-import { signUpYupSchema } from 'components';
+import { signUpYupSchema, ErrorAlert } from 'components';
 import { createUser } from 'firebaseAPI';
 import { SignInAndUpResponse } from 'models';
 import { currentUser } from 'state';
@@ -30,6 +30,8 @@ interface ISignUpFormData {
 
 export const SignUp: FC = () => {
   const { t } = useTranslation('SignUp');
+
+  const [error, setError] = useState('');
 
   const {
     register,
@@ -45,6 +47,8 @@ export const SignUp: FC = () => {
     mode: 'onSubmit',
   });
 
+  const clearError = () => setError('');
+
   const history = useHistory();
 
   const setCurrentUser = useSetRecoilState(currentUser);
@@ -56,7 +60,7 @@ export const SignUp: FC = () => {
         setCurrentUser(data.user);
         history.push('/');
       })
-      .catch((error) => console.log(error));
+      .catch((error: { code: string; message: string }) => setError(error.code));
   };
 
   return (
@@ -73,23 +77,24 @@ export const SignUp: FC = () => {
       <Text as="h2" textStyle="h2" color={useColorModeValue('invoice.richBlack', 'white')} mb={6}>
         {t('CREATE_ACCOUNT')}
       </Text>
+      {error && <ErrorAlert>{t([`ERROR.${error}` as TFuncKey<'SignUp'>, 'ERROR.GENERIC'])}</ErrorAlert>}
       <form onSubmit={handleSubmit(onSubmit)}>
         <VStack spacing={5}>
-          <FormControl id="email" isInvalid={!!errors.email?.message}>
+          <FormControl id="email" isInvalid={!!errors.email?.message} onChange={clearError}>
             <Flex justifyContent="space-between">
               <FormLabel>{t('EMAIL')}</FormLabel>
               <FormErrorMessage>{errors?.email?.message}</FormErrorMessage>
             </Flex>
             <Input {...register('email')} />
           </FormControl>
-          <FormControl id="password" isInvalid={!!errors.password?.message}>
+          <FormControl id="password" isInvalid={!!errors.password?.message} onChange={clearError}>
             <Flex justifyContent="space-between">
               <FormLabel>{t('PASSWORD')}</FormLabel>
               <FormErrorMessage>{errors?.password?.message}</FormErrorMessage>
             </Flex>
             <Input type="password" {...register('password')} />
           </FormControl>
-          <FormControl id="confirmPassword" isInvalid={!!errors.confirmPassword?.message}>
+          <FormControl id="confirmPassword" isInvalid={!!errors.confirmPassword?.message} onChange={clearError}>
             <Flex justifyContent="space-between">
               <FormLabel>{t('CONFIRM_PASSWORD')}</FormLabel>
               <FormErrorMessage>{errors?.confirmPassword?.message}</FormErrorMessage>

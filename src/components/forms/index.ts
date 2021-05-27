@@ -1,2 +1,3 @@
-export * from './SignUp';
-export * from './SignIn';
+export * from './signUp';
+export * from './signIn';
+export * from './errorAlert';
