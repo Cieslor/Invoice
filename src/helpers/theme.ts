@@ -3,7 +3,7 @@ import { colors, fonts, textStyles, Button, Input, FormLabel, FormError } from '
 
 const config: DeepPartial<ThemeConfig> = {
   initialColorMode: 'light',
-  useSystemColorMode: true,
+  useSystemColorMode: false,
 };
 
 export const theme = extendTheme({

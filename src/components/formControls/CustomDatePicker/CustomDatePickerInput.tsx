@@ -1,5 +1,5 @@
 import React, { forwardRef } from 'react';
-import { Flex, Text, useColorMode, Icon } from '@chakra-ui/react';
+import { Flex, Text, useColorModeValue, Icon } from '@chakra-ui/react';
 import dayjs from 'dayjs';
 import 'react-datepicker/dist/react-datepicker.css';
 import { ReactComponent as CalendarIcon } from 'assets/icon-calendar.svg';
@@ -11,7 +11,6 @@ interface ICustomDatePickerInputProps {
 
 export const CustomDatePickerInput = forwardRef<HTMLInputElement, ICustomDatePickerInputProps>(
   ({ value, onClick }, ref) => {
-    const { colorMode } = useColorMode();
     return (
       <Flex
         w="100%"
@@ -21,19 +20,13 @@ export const CustomDatePickerInput = forwardRef<HTMLInputElement, ICustomDatePic
         alignItems="center"
         cursor="pointer"
         border="1px solid"
-        borderColor={colorMode === 'dark' ? 'invoice.ebonyClay' : 'invoice.lavenderWeb'}
+        borderColor={useColorModeValue('invoice.lavenderWeb', 'invoice.ebonyClay')}
         borderRadius="0.25rem"
-        bgColor={colorMode === 'dark' ? 'invoice.spaceCadet' : 'white'}
+        bgColor={useColorModeValue('white', 'invoice.spaceCadet')}
         onClick={onClick}
         ref={ref}
       >
-        <Text
-          textStyle="h4"
-          color={colorMode === 'dark' ? 'white' : 'invoice.richBlack'}
-          pt="2px"
-          mb="-2px"
-          isTruncated
-        >
+        <Text textStyle="h4" color={useColorModeValue('invoice.richBlack', 'white')} pt="2px" mb="-2px" isTruncated>
           {dayjs(value).format('D MMM YYYY')}
         </Text>
         <Icon

@@ -1,5 +1,5 @@
 import React, { FC, createElement } from 'react';
-import { Box, useColorMode } from '@chakra-ui/react';
+import { Box, useColorModeValue } from '@chakra-ui/react';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { CustomDatePickerInput, customDatePickerStyles } from 'components';
@@ -11,10 +11,8 @@ interface ICustomDatePickerProps {
 }
 
 export const CustomDatePicker: FC<ICustomDatePickerProps> = ({ isDisabled, date, onChange }) => {
-  const { colorMode } = useColorMode();
-
   return (
-    <Box w="100%" sx={{ ...customDatePickerStyles(colorMode) }}>
+    <Box w="100%" sx={{ ...customDatePickerStyles(useColorModeValue) }}>
       <DatePicker
         showPopperArrow={false}
         selected={date}

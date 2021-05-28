@@ -1,7 +1,8 @@
 import arrowLeft from 'assets/icon-arrow-left.svg';
 import arrowRight from 'assets/icon-arrow-right.svg';
+import { useColorModeValue } from '@chakra-ui/react';
 
-export const customDatePickerStyles = (colorMode: string) => ({
+export const customDatePickerStyles = (colorModeValue: typeof useColorModeValue) => ({
   '& .react-datepicker-wrapper': {
     width: '100%',
   },
@@ -10,16 +11,16 @@ export const customDatePickerStyles = (colorMode: string) => ({
   },
   '& .react-datepicker': {
     fontFamily: 'inherit',
-    color: colorMode === 'dark' ? 'invoice.lavenderWeb' : 'invoice.richBlack',
-    backgroundColor: colorMode === 'dark' ? 'invoice.ebonyClay' : 'white',
+    color: colorModeValue('invoice.richBlack', 'invoice.lavenderWeb'),
+    backgroundColor: colorModeValue('white', 'invoice.ebonyClay'),
     border: 'none',
     borderRadius: '0.5rem',
-    boxShadow: colorMode === 'dark' ? '0px 10px 20px rgba(0, 0, 0, 0.25)' : '0px 10px 20px rgba(72, 84, 159, 0.25)',
+    boxShadow: colorModeValue('0px 10px 20px rgba(72, 84, 159, 0.25)', '0px 10px 20px rgba(0, 0, 0, 0.25)'),
   },
   '& .react-datepicker__header': {
     paddingTop: '1.5rem',
     paddingBottom: '2rem',
-    backgroundColor: colorMode === 'dark' ? 'invoice.ebonyClay' : 'white',
+    backgroundColor: colorModeValue('white', 'invoice.ebonyClay'),
     borderBottom: 'none',
     borderRadius: '0.5rem 0.5rem 0 0',
   },
@@ -36,7 +37,7 @@ export const customDatePickerStyles = (colorMode: string) => ({
     backgroundImage: arrowRight,
   },
   '& .react-datepicker__current-month': {
-    color: colorMode === 'dark' ? 'invoice.lavenderWeb' : 'invoice.richBlack',
+    color: colorModeValue('invoice.richBlack', 'invoice.lavenderWeb'),
     fontSize: '0.75rem',
     fontWeight: 700,
     lineHeight: '1.25em',
@@ -55,14 +56,14 @@ export const customDatePickerStyles = (colorMode: string) => ({
   '& .react-datepicker__day': {
     width: '1rem',
     margin: '0 0.5rem',
-    color: colorMode === 'dark' ? 'invoice.lavenderWeb' : 'invoice.richBlack',
+    color: colorModeValue('invoice.richBlack', 'invoice.lavenderWeb'),
     fontSize: '0.75rem',
     fontWeight: 700,
     lineHeight: '1.25em',
     letterSpacing: '-0.25px',
     outline: 'none',
     '&:hover, &--selected, &--keyboard-selected': {
-      backgroundColor: colorMode === 'dark' ? 'invoice.ebonyClay' : 'white',
+      backgroundColor: colorModeValue('white', 'invoice.ebonyClay'),
       color: 'invoice.mediumSlateBlue',
     },
   },

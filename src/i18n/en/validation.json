@@ -1,0 +1,5 @@
+{
+  "REQUIRED": "Field is required",
+  "EMAIL": "Must be an email",
+  "ISEQUAL": "{{field}} must be the same as {{compared}}"
+}
