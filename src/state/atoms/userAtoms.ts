@@ -9,5 +9,4 @@ export const isUserLoaded = atom({
 export const currentUser = atom({
   key: 'currentUser',
   default: null as User | null,
-  dangerouslyAllowMutability: true,
 });

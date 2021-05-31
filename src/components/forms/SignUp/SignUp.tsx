@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react';
+import React, { FC, useState, BaseSyntheticEvent } from 'react';
 import { useTranslation, TFuncKey } from 'react-i18next';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -15,7 +15,7 @@ import {
   Text,
   Link as ChakraLink,
 } from '@chakra-ui/react';
-import { useHistory, Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { useSetRecoilState } from 'recoil';
 import { signUpYupSchema, ErrorAlert } from 'components';
 import { createUser } from 'firebaseAPI';
@@ -53,13 +53,20 @@ export const SignUp: FC = () => {
 
   const setCurrentUser = useSetRecoilState(currentUser);
 
-  const onSubmit = async (data: ISignUpFormData) => {
+  const onSubmit = async (data: ISignUpFormData, e: BaseSyntheticEvent | undefined) => {
+    e?.preventDefault();
     const { email, password } = data;
+
     await createUser(email, password)
       .then((data: SignInAndUpResponse) => {
-        setCurrentUser(data.user);
-        history.push('/');
+        const { user } = data;
+        setCurrentUser({
+          email: user?.email ?? '',
+          photoURL: user?.photoURL ?? '',
+          uid: user?.uid ?? '',
+        });
       })
+      .then(() => history.push('/'))
       .catch((error: { code: string; message: string }) => setError(error.code));
   };
 
@@ -77,7 +84,11 @@ export const SignUp: FC = () => {
       <Text as="h2" textStyle="h2" color={useColorModeValue('invoice.richBlack', 'white')} mb={6}>
         {t('CREATE_ACCOUNT')}
       </Text>
-      {error && <ErrorAlert>{t([`ERROR.${error}` as TFuncKey<'SignUp'>, 'ERROR.GENERIC'])}</ErrorAlert>}
+      {error && (
+        <Box mb={6}>
+          <ErrorAlert>{t([`ERROR.${error}` as TFuncKey<'SignUp'>, 'ERROR.GENERIC'])}</ErrorAlert>
+        </Box>
+      )}
       <form onSubmit={handleSubmit(onSubmit)}>
         <VStack spacing={5}>
           <FormControl id="email" isInvalid={!!errors.email?.message} onChange={clearError}>

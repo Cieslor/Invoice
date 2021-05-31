@@ -3,3 +3,7 @@ export * from './forms';
 export * from './colorModeSwitcher';
 export * from './protectedRoute';
 export * from './common';
+export * from './sideBar';
+export * from './mainWrapper';
+export * from './profile';
+export * from './avatarPicker';
