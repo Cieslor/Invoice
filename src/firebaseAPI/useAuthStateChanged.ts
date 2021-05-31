@@ -9,7 +9,11 @@ export const useAuthStateChanged = () => {
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
-      setUser(user);
+      setUser({
+        email: user?.email ?? '',
+        photoURL: user?.photoURL ?? '',
+        uid: user?.uid ?? '',
+      });
       setIsLoaded(true);
     });
     return unsubscribe;

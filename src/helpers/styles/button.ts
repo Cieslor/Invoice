@@ -7,7 +7,7 @@ export const Button = {
     md: {
       px: '1.5rem',
       py: '1rem',
-      h: 'auto',
+      h: 'max-content',
       fontSize: '0.75rem',
       lineHeight: '1.25em',
       letterSpacing: '-0.25px',
@@ -15,7 +15,7 @@ export const Button = {
     long: {
       px: '1.5rem',
       py: '1rem',
-      h: 'auto',
+      h: 'max-content',
       w: '100%',
       fontSize: '0.75rem',
       lineHeight: '1.25em',

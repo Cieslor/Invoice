@@ -55,7 +55,12 @@ export const SignIn: FC = () => {
     const { email, password } = data;
     await signIn(email, password)
       .then((data: SignInAndUpResponse) => {
-        setCurrentUser(data.user);
+        const { user } = data;
+        setCurrentUser({
+          email: user?.email ?? '',
+          photoURL: user?.photoURL ?? '',
+          uid: user?.uid ?? '',
+        });
         history.push('/');
       })
       .catch((error: { code: string; message: string }) => setError(error.code));
@@ -75,7 +80,11 @@ export const SignIn: FC = () => {
       <Text as="h2" textStyle="h2" color={useColorModeValue('invoice.richBlack', 'white')} mb={6}>
         {t('SIGN_IN')}
       </Text>
-      {error && <ErrorAlert>{t([`ERROR.${error}` as TFuncKey<'SignIn'>, 'ERROR.GENERIC'])}</ErrorAlert>}
+      {error && (
+        <Box mb={6}>
+          <ErrorAlert>{t([`ERROR.${error}` as TFuncKey<'SignIn'>, 'ERROR.GENERIC'])}</ErrorAlert>
+        </Box>
+      )}
       <form onSubmit={handleSubmit(onSubmit)}>
         <VStack spacing={5}>
           <FormControl id="email" isInvalid={!!errors.email?.message} onChange={clearError}>

@@ -6,6 +6,7 @@ import Common from './en/common.json';
 import Validation from './en/validation.json';
 import SignUp from './en/signUp.json';
 import SignIn from './en/signIn.json';
+import Profile from './en/profile.json';
 import { buildYupLocale } from 'i18n';
 
 export const resources = {
@@ -14,6 +15,7 @@ export const resources = {
     Validation,
     SignUp,
     SignIn,
+    Profile,
   },
 } as const;
 
@@ -25,7 +27,7 @@ i18n
     {
       lng: 'en',
       fallbackLng: 'en',
-      ns: ['Common', 'Validation', 'SignUp', 'SignIn'],
+      ns: ['Common', 'Validation', 'SignUp', 'SignIn', 'Profile'],
       defaultNS: 'Common',
       debug: false,
       interpolation: {
