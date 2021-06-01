@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { Menu, Avatar, MenuButton, MenuList, useColorModeValue, MenuDivider } from '@chakra-ui/react';
+import { Menu, Avatar, MenuButton, MenuList, useColorModeValue, MenuDivider, useToast } from '@chakra-ui/react';
 import { useTranslation } from 'react-i18next';
 import { useHistory } from 'react-router-dom';
 import { BsFillPersonFill } from 'react-icons/bs';
@@ -10,6 +10,7 @@ import { userPhotoUrl } from 'state';
 
 export const Profile: FC = () => {
   const history = useHistory();
+  const toast = useToast();
 
   const { t } = useTranslation('Profile');
 
@@ -18,7 +19,14 @@ export const Profile: FC = () => {
   const handleLogout = async () => {
     await logOut()
       .then(() => history.push('/signin'))
-      .catch((error) => console.log(error));
+      .catch(() =>
+        toast({
+          description: t('LOG_OUT_ERROR'),
+          status: 'error',
+          duration: 3000,
+          isClosable: true,
+        })
+      );
   };
   return (
     <Menu autoSelect={false} placement="right-start">
