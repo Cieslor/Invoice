@@ -1,12 +1,11 @@
 import React, { FC, useState } from 'react';
-import { Box, Text, VStack, Flex, Button, Icon } from '@chakra-ui/react';
+import { Box, Text, VStack, Flex, Button, Icon, useToast } from '@chakra-ui/react';
 import { RiSaveFill } from 'react-icons/ri';
 import { useTranslation } from 'react-i18next';
 import { useRecoilState } from 'recoil';
 import { useHistory } from 'react-router-dom';
 import { currentUser } from 'state';
 import { AvatarPicker } from 'components';
-import { FirebaseStorageError } from 'models';
 import { uploadAvatar, updatePhotoUrl, storage, auth } from 'firebaseAPI';
 
 export const ProfileView: FC = () => {
@@ -15,10 +14,17 @@ export const ProfileView: FC = () => {
   const [user, setUser] = useRecoilState(currentUser);
   const { t } = useTranslation('Profile');
   const history = useHistory();
+  const toast = useToast();
 
   const onAvatarChange = (file: File | null) => setAvatar(file);
 
-  const handleSavingError = (error: FirebaseStorageError) => console.error(error);
+  const handleSavingError = () =>
+    toast({
+      description: t('AVATAR_UPLOAD_ERROR'),
+      status: 'error',
+      duration: 3000,
+      isClosable: true,
+    });
 
   const saveChanges = async () => {
     setIsSaving(true);
@@ -37,7 +43,14 @@ export const ProfileView: FC = () => {
           });
           history.push('/');
         })
-        .catch((error) => console.log(error))
+        .catch(() =>
+          toast({
+            description: t('AVATAR_UPLOAD_ERROR'),
+            status: 'error',
+            duration: 3000,
+            isClosable: true,
+          })
+        )
         .finally(() => setIsSaving(false));
     });
   };
