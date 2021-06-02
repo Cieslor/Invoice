@@ -7,3 +7,4 @@ export * from './sideBar';
 export * from './mainWrapper';
 export * from './profile';
 export * from './avatarPicker';
+export * from './formSlideInContainer';

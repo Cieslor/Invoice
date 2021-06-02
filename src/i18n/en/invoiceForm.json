@@ -1,0 +1,17 @@
+{
+  "EDIT": "Edit",
+  "NEW_INVOICE": "New Invoice",
+  "BILL_FROM": "Bill From",
+  "BILL_TO": "Bill To",
+  "CLIENTS_NAME": "Client's Name",
+  "CLIENTS_EMAIL": "Client's Email",
+  "CLIENTS_EMAIL_PLACEHOLDER": "e.g. email@example.com",
+  "STREET_ADDRESS": "Street Address",
+  "CITY": "City",
+  "POST_CODE": "Post Code",
+  "COUNTRY": "Country",
+  "INVOICE_DATE": "Invoice Date",
+  "PAYMENT_TERMS": "Payment Terms",
+  "PROJECT_DESCRIPTION": "Project Description",
+  "PROJECT_DESCRIPTION_PLACEHOLDER": "e.g. Graphic Design System"
+}

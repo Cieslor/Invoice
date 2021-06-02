@@ -20,5 +20,7 @@ module.exports = {
   rules: {
     'prettier/prettier': 'error',
     'react/prop-types': 0,
+    'no-unused-vars': 'off',
+    '@typescript-eslint/no-unused-vars': 'error',
   },
 };
