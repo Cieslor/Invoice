@@ -30,7 +30,7 @@ const innerVariants = {
   },
 };
 
-export const FormSlideInContainer: FC<IFormSlideInContainerProps> = ({ children, showContent, close }) => {
+export const FormSlideInContainer: FC<IFormSlideInContainerProps> = ({ children, showContent }) => {
   const {
     colors: { invoice },
   } = useTheme();
@@ -74,13 +74,13 @@ export const FormSlideInContainer: FC<IFormSlideInContainerProps> = ({ children,
               exit="hidden"
               h={['calc(100% - 70px)', 'calc(100% - 80px)', '100%']}
               w="100%"
-              maxW={['100%', '600px', '720px']}
+              maxW="720px"
               pt={[8, 14]}
-              pr={[6, 14]}
-              pl={[6, 14, '156px']}
+              pr={[1, 8]}
+              pl={[1, 8, '140px']}
               bg={colorMode === 'dark' ? invoice.xiketic : 'white'}
               borderRadius={[0, '0 20px 20px 0']}
-              overflowY="auto"
+              overflow="hidden"
               zIndex={1}
             >
               <Box mb={6} display={['block', 'none']}>

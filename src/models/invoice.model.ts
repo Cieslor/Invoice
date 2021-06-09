@@ -1,13 +1,11 @@
-export type InvoiceFormMode = 'New' | 'Edit';
+import { ItemFields } from 'models';
 
-export type InvoiceStatus = 'Pending' | 'Draft' | 'Paid' | 'None';
-
-export enum InvoiceFormModeEnum {
+export enum InvoiceFormMode {
   New = 'New',
   Edit = 'Edit',
 }
 
-export enum InvoiceStatusEnum {
+export enum InvoiceStatus {
   Pending = 'Pending',
   Draft = 'Draft',
   Paid = 'Paid',
@@ -28,4 +26,11 @@ export interface IInvoiceBillingInfo {
   invoiceDate: Date;
   paymentTerms: string;
   projectDescription: string;
+}
+
+export interface Invoice extends IInvoiceBillingInfo {
+  invoiceItems: (ItemFields & { totalPrice: number })[];
+  userUid: string;
+  status: InvoiceStatus;
+  createdAt: Date;
 }

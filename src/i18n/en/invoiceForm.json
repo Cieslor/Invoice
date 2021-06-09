@@ -13,5 +13,17 @@
   "INVOICE_DATE": "Invoice Date",
   "PAYMENT_TERMS": "Payment Terms",
   "PROJECT_DESCRIPTION": "Project Description",
-  "PROJECT_DESCRIPTION_PLACEHOLDER": "e.g. Graphic Design System"
+  "PROJECT_DESCRIPTION_PLACEHOLDER": "e.g. Graphic Design System",
+  "QUANTITY": "Quantity",
+  "QTY": "Qty.",
+  "PRICE": "Price",
+  "TOTAL": "Total",
+  "ITEM_NAME": "Item Name",
+  "ITEM_LIST": "Item List",
+  "ADD_NEW_ITEM": "+ Add New Item",
+  "CANCEL": "Cancel",
+  "DISCARD": "Discard",
+  "SAVE_CHANGES": "Save Changes",
+  "SAVE_AS_DRAFT": "Save as Draft",
+  "SAVE_AND_SEND": "Save & Send"
 }

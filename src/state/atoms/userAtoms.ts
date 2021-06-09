@@ -6,7 +6,7 @@ export const isUserLoaded = atom({
   default: false,
 });
 
-export const currentUser = atom({
+export const currentUser = atom<User | null>({
   key: 'currentUser',
-  default: null as User | null,
+  default: null,
 });

@@ -32,7 +32,7 @@ export const CustomSelect = forwardRef<HTMLDivElement, ICustomSelectProps>(
             as="label"
             display="block"
             textStyle="body_1"
-            color={isInvalid ? 'invoice.redSalsa' : useColorModeValue('invoice.glaucous', 'invoice.lawenderWeb')}
+            color={isInvalid ? 'invoice.redSalsa' : useColorModeValue('invoice.glaucous', 'invoice.lavenderWeb')}
             mr={3}
           >
             {label}

@@ -17,10 +17,11 @@ import {
 } from '@chakra-ui/react';
 import { useHistory, Link } from 'react-router-dom';
 import { useSetRecoilState } from 'recoil';
-import { signInYupSchema, ErrorAlert } from 'components';
+import { ErrorAlert } from 'components';
 import { signIn } from 'firebaseAPI';
 import { SignInAndUpResponse } from 'models';
 import { currentUser } from 'state';
+import { signInYupSchema } from 'helpers';
 
 interface ISignInFormData {
   email: string;
@@ -37,7 +38,7 @@ export const SignIn: FC = () => {
     handleSubmit,
     formState: { errors, isSubmitting },
   } = useForm<ISignInFormData>({
-    resolver: yupResolver(signInYupSchema),
+    resolver: yupResolver(signInYupSchema()),
     defaultValues: {
       email: '',
       password: '',
@@ -56,12 +57,16 @@ export const SignIn: FC = () => {
     await signIn(email, password)
       .then((data: SignInAndUpResponse) => {
         const { user } = data;
-        setCurrentUser({
-          email: user?.email ?? '',
-          photoURL: user?.photoURL ?? '',
-          uid: user?.uid ?? '',
-        });
-        history.push('/');
+        if (user) {
+          setCurrentUser({
+            email: user.email ?? '',
+            photoURL: user.photoURL ?? '',
+            uid: user.uid ?? '',
+          });
+          history.push('/');
+        } else {
+          setCurrentUser(null);
+        }
       })
       .catch((error: { code: string; message: string }) => setError(error.code));
   };

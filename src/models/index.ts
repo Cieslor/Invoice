@@ -1,3 +1,4 @@
-export * from './firebase.models';
+export * from './firebase.model';
 export * from './user.model';
-export * from './invoice.models';
+export * from './invoice.model';
+export * from './invoiceItem.model';

@@ -1,6 +1,6 @@
 import { extendTheme, DeepPartial, ThemeConfig } from '@chakra-ui/react';
 import { mode } from '@chakra-ui/theme-tools';
-import { colors, fonts, textStyles, Button, Input, FormLabel, FormError } from 'helpers';
+import { colors, fonts, textStyles, Button, Input, FormLabel, FormError, NumberInput } from 'helpers';
 
 const config: DeepPartial<ThemeConfig> = {
   initialColorMode: 'light',
@@ -24,5 +24,6 @@ export const theme = extendTheme({
     Input,
     FormLabel,
     FormError,
+    NumberInput,
   },
 });

@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { Text, Flex, Box } from '@chakra-ui/react';
 import { useTranslation } from 'react-i18next';
-import { InvoiceFormMode, InvoiceFormModeEnum } from 'models';
+import { InvoiceFormMode } from 'models';
 
 interface IInvoiceFormHeaderProps {
   mode: InvoiceFormMode;
@@ -11,7 +11,7 @@ export const InvoiceFormHeader: FC<IInvoiceFormHeaderProps> = ({ mode }) => {
   const { t } = useTranslation('InvoiceForm');
   return (
     <>
-      {mode === InvoiceFormModeEnum.New ? (
+      {mode === InvoiceFormMode.New ? (
         <Text as="h2" textStyle="h2_bigger" mb={[6, 12]}>
           {t('NEW_INVOICE')}
         </Text>
