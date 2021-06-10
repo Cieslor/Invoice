@@ -15,6 +15,12 @@ export const textStyles = {
     lineHeight: '1.125em',
     letterSpacing: '-0.63px',
   },
+  h2_bigger: {
+    fontSize: '1.5rem',
+    fontWeight: 700,
+    lineHeight: '2rem',
+    letterSpacing: '-0.5px',
+  },
   h3: {
     fontSize: ['0.6875rem', '1rem'],
     fontWeight: 700,

@@ -7,6 +7,7 @@ import { useHistory } from 'react-router-dom';
 import { currentUser } from 'state';
 import { AvatarPicker } from 'components';
 import { uploadAvatar, updatePhotoUrl, storage, auth } from 'firebaseAPI';
+import { errorToast } from 'helpers';
 
 export const ProfileView: FC = () => {
   const [avatar, setAvatar] = useState<File | null>(null);
@@ -18,13 +19,7 @@ export const ProfileView: FC = () => {
 
   const onAvatarChange = (file: File | null) => setAvatar(file);
 
-  const handleSavingError = () =>
-    toast({
-      description: t('AVATAR_UPLOAD_ERROR'),
-      status: 'error',
-      duration: 3000,
-      isClosable: true,
-    });
+  const handleSavingError = () => toast(errorToast(t('AVATAR_UPLOAD_ERROR')));
 
   const saveChanges = async () => {
     setIsSaving(true);
@@ -43,14 +38,7 @@ export const ProfileView: FC = () => {
           });
           history.push('/');
         })
-        .catch(() =>
-          toast({
-            description: t('AVATAR_UPLOAD_ERROR'),
-            status: 'error',
-            duration: 3000,
-            isClosable: true,
-          })
-        )
+        .catch(() => toast(errorToast(t('AVATAR_UPLOAD_ERROR'))))
         .finally(() => setIsSaving(false));
     });
   };

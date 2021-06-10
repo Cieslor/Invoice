@@ -5,7 +5,7 @@ export const Button = {
   },
   sizes: {
     md: {
-      px: '1.5rem',
+      px: ['1rem', '1.5rem'],
       py: '1rem',
       h: 'max-content',
       fontSize: '0.75rem',
@@ -32,7 +32,7 @@ export const Button = {
     },
     'primary-with-icon': {
       pr: '1rem',
-      pl: '0.5rem',
+      pl: '0.5rem !important',
       py: '0.5rem',
       bg: 'invoice.mediumSlateBlue',
       color: 'white',

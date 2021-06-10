@@ -1,4 +1,4 @@
-import React, { useMemo, forwardRef } from 'react';
+import React, { useMemo, forwardRef, BaseSyntheticEvent } from 'react';
 import { Box, Text, useColorModeValue, Flex, useTheme } from '@chakra-ui/react';
 import Select from 'react-select';
 import { customSelectStyles } from 'components';
@@ -9,13 +9,14 @@ interface ICustomSelectProps {
   errorText?: string;
   options: { value: string; label: string }[];
   onChange: (value: string) => void;
+  onBlur: (value: string) => void;
   name: string;
   value?: string;
   placeholder?: string;
 }
 
 export const CustomSelect = forwardRef<HTMLDivElement, ICustomSelectProps>(
-  ({ label, isInvalid, errorText, options, onChange, name, value, placeholder }, ref) => {
+  ({ label, isInvalid, errorText, options, onChange, name, value, placeholder, onBlur }, ref) => {
     const {
       colors: { invoice },
     } = useTheme();
@@ -31,7 +32,7 @@ export const CustomSelect = forwardRef<HTMLDivElement, ICustomSelectProps>(
             as="label"
             display="block"
             textStyle="body_1"
-            color={isInvalid ? 'invoice.redSalsa' : useColorModeValue('invoice.glaucous', 'invoice.lawenderWeb')}
+            color={isInvalid ? 'invoice.redSalsa' : useColorModeValue('invoice.glaucous', 'invoice.lavenderWeb')}
             mr={3}
           >
             {label}
@@ -50,7 +51,7 @@ export const CustomSelect = forwardRef<HTMLDivElement, ICustomSelectProps>(
           value={options.find((c) => c.value === value)}
           inputRef={ref}
           placeholder={placeholder}
-          menuIsOpen
+          onBlur={(event: BaseSyntheticEvent) => onBlur(event.target.value)}
         />
       </Box>
     );

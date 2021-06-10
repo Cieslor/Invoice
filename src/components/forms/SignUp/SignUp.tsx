@@ -17,10 +17,11 @@ import {
 } from '@chakra-ui/react';
 import { Link, useHistory } from 'react-router-dom';
 import { useSetRecoilState } from 'recoil';
-import { signUpYupSchema, ErrorAlert } from 'components';
+import { ErrorAlert } from 'components';
 import { createUser } from 'firebaseAPI';
 import { SignInAndUpResponse } from 'models';
 import { currentUser } from 'state';
+import { signUpYupSchema } from 'helpers';
 
 interface ISignUpFormData {
   email: string;
@@ -60,11 +61,15 @@ export const SignUp: FC = () => {
     await createUser(email, password)
       .then((data: SignInAndUpResponse) => {
         const { user } = data;
-        setCurrentUser({
-          email: user?.email ?? '',
-          photoURL: user?.photoURL ?? '',
-          uid: user?.uid ?? '',
-        });
+        if (user) {
+          setCurrentUser({
+            email: user.email ?? '',
+            photoURL: user.photoURL ?? '',
+            uid: user.uid ?? '',
+          });
+        } else {
+          setCurrentUser(null);
+        }
       })
       .then(() => history.push('/'))
       .catch((error: { code: string; message: string }) => setError(error.code));
