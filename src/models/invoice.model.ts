@@ -12,7 +12,7 @@ export enum InvoiceStatus {
   None = 'None',
 }
 
-export interface IInvoiceBillingInfo {
+export interface InvoiceBillingInfo {
   fromStreetAddress: string;
   fromCity: string;
   fromPostCode: string;
@@ -28,8 +28,12 @@ export interface IInvoiceBillingInfo {
   projectDescription: string;
 }
 
-export interface Invoice extends IInvoiceBillingInfo {
-  invoiceItems: (ItemFields & { totalPrice: number })[];
+export interface InvoiceItem extends ItemFields {
+  totalPrice: number;
+}
+
+export interface Invoice extends InvoiceBillingInfo {
+  invoiceItems: InvoiceItem[];
   userUid: string;
   status: InvoiceStatus;
   createdAt: Date;

@@ -1,11 +1,12 @@
-import { useMutation } from 'react-query';
+import { useMutation, useQueryClient } from 'react-query';
 import { createInvoice } from 'firebaseAPI';
 import { Invoice } from 'models';
 
 export const useCreateInvoice = () => {
+  const queryClient = useQueryClient();
   return useMutation((invoice: Invoice) => createInvoice(invoice), {
-    onSuccess: (response) => {
-      console.log(response);
+    onSuccess: () => {
+      queryClient.refetchQueries(['invoices']);
     },
   });
 };

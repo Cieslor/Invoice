@@ -7,6 +7,7 @@ import { useRecoilValue } from 'recoil';
 import { logOut } from 'firebaseAPI';
 import { ProfileMenuItem } from 'components';
 import { userPhotoUrl } from 'state';
+import { errorToast } from 'helpers';
 
 export const Profile: FC = () => {
   const history = useHistory();
@@ -19,15 +20,7 @@ export const Profile: FC = () => {
   const handleLogout = async () => {
     await logOut()
       .then(() => history.push('/signin'))
-      .catch(() =>
-        toast({
-          description: t('LOG_OUT_ERROR'),
-          status: 'error',
-          duration: 3000,
-          isClosable: true,
-          position: 'top-right',
-        })
-      );
+      .catch(() => toast(errorToast(t('LOG_OUT_ERROR'))));
   };
   return (
     <Menu autoSelect={false} placement="right-start">

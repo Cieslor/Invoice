@@ -25,5 +25,11 @@
   "DISCARD": "Discard",
   "SAVE_CHANGES": "Save Changes",
   "SAVE_AS_DRAFT": "Save as Draft",
-  "SAVE_AND_SEND": "Save & Send"
+  "SAVE_AND_SEND": "Save & Send",
+  "ATLEAST_1_ITEM": "Add at least one item",
+  "FILL_IN_ALL_FIELDS": "Fill in all required fields",
+  "INVOICE_SEND_SUCCESSFULLY": "the invoice has been successfully sent",
+  "ERROR_SENDING_INVOICE": "An error occurred when creating and invoice",
+  "DAYS_WITH_COUNT": "Net {{count}} Day",
+  "DAYS_WITH_COUNT_plural": "Net {{count}} Days"
 }

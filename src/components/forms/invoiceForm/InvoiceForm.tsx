@@ -11,32 +11,54 @@ import {
   Wrap,
   WrapItem,
   useColorModeValue,
+  useToast,
 } from '@chakra-ui/react';
 import { useTranslation } from 'react-i18next';
 import { useForm, Controller } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { useSetRecoilState } from 'recoil';
-import { invoiceItems as invoiceItemsFromState } from 'state';
+import { useSetRecoilState, useRecoilValue } from 'recoil';
+import {
+  invoiceItems as invoiceItemsAtom,
+  areInvoiceItemsValid,
+  invoiceItemsAfterValidation as invoiceItemsAfterValidationAtom,
+  showItemValidationErrors,
+} from 'state';
 import { InvoiceFormHeader, CustomSelect, CustomDatePicker, ItemList, InvoiceFormNav } from 'components';
-import { InvoiceFormMode, IInvoiceBillingInfo, InvoiceStatus, ItemFields } from 'models';
+import { InvoiceFormMode, InvoiceBillingInfo, InvoiceStatus, ItemFields, InvoiceItem } from 'models';
 import { emptyInvoiceBillingInfo } from 'utilities';
-import { invoiceBillingInfoYupSchema, transparentBgScrollbar } from 'helpers';
+import { invoiceBillingInfoYupSchema, transparentBgScrollbar, errorToast, invoiceFormPaymentTerms } from 'helpers';
 interface IInvoiceFormProps {
   mode: InvoiceFormMode;
-  defaultValues?: IInvoiceBillingInfo;
+  defaultValues?: InvoiceBillingInfo;
   invoiceItems?: ItemFields[];
   onCancel: () => void;
+  onSave: (billingInfo: InvoiceBillingInfo, invoiceItems: InvoiceItem[]) => void;
+  onDraftSave?: (billingInfo: InvoiceBillingInfo, invoiceItems: InvoiceItem[]) => void;
 }
 
-export const InvoiceForm: FC<IInvoiceFormProps> = ({ mode, defaultValues, invoiceItems, onCancel }) => {
+export const InvoiceForm: FC<IInvoiceFormProps> = ({
+  mode,
+  defaultValues,
+  invoiceItems,
+  onCancel,
+  onSave,
+  onDraftSave,
+}) => {
   const { t } = useTranslation('InvoiceForm');
-  const setInvoiceItems = useSetRecoilState(invoiceItemsFromState);
+  const setInvoiceItems = useSetRecoilState(invoiceItemsAtom);
+  const invoiceItemsAfterValidation = useRecoilValue(invoiceItemsAfterValidationAtom);
+  const areItemsValid = useRecoilValue(areInvoiceItemsValid);
+  const setShowItemsValidationError = useSetRecoilState(showItemValidationErrors);
+
+  const toast = useToast();
 
   const {
     control,
     register,
-    formState: { errors },
-  } = useForm<IInvoiceBillingInfo>({
+    formState: { errors, isValid },
+    trigger,
+    getValues,
+  } = useForm<InvoiceBillingInfo>({
     mode: 'onBlur',
     defaultValues: defaultValues ?? emptyInvoiceBillingInfo,
     resolver: yupResolver(invoiceBillingInfoYupSchema()),
@@ -44,7 +66,29 @@ export const InvoiceForm: FC<IInvoiceFormProps> = ({ mode, defaultValues, invoic
 
   useEffect(() => {
     setInvoiceItems(invoiceItems ?? ([] as ItemFields[]));
-  });
+  }, []);
+
+  const handleFormSave = (mode: 'Draft' | 'Send') => {
+    if (isValid && !!invoiceItemsAfterValidation.length && areItemsValid) {
+      mode === 'Send'
+        ? onSave(
+            getValues(),
+            invoiceItemsAfterValidation.map((item) => item.fields)
+          )
+        : !!onDraftSave
+        ? onDraftSave(
+            getValues(),
+            invoiceItemsAfterValidation.map((item) => item.fields)
+          )
+        : undefined;
+    } else if (invoiceItemsAfterValidation.length === 0) {
+      toast(errorToast(t('ATLEAST_1_ITEM')));
+    } else if (!isValid || !areItemsValid) {
+      !areItemsValid && setShowItemsValidationError(true);
+      trigger();
+      toast(errorToast(t('FILL_IN_ALL_FIELDS')));
+    }
+  };
 
   return (
     <Box h={['calc(100% - 48px)', '100%']} pb="126px">
@@ -201,11 +245,7 @@ export const InvoiceForm: FC<IInvoiceFormProps> = ({ mode, defaultValues, invoic
                     isInvalid={invalid}
                     errorText={error?.message}
                     onBlur={onBlur}
-                    options={[
-                      { value: 'chocolate', label: 'Chocolate' },
-                      { value: 'strawberry', label: 'Strawberry' },
-                      { value: 'vanilla', label: 'Vanilla' },
-                    ]}
+                    options={invoiceFormPaymentTerms(t)}
                   />
                 )}
               />
@@ -231,7 +271,12 @@ export const InvoiceForm: FC<IInvoiceFormProps> = ({ mode, defaultValues, invoic
         pl={[5, 12, '156px']}
         bg={useColorModeValue('white', 'invoice.xiketic')}
       >
-        <InvoiceFormNav status={InvoiceStatus.None} onCancel={onCancel} />
+        <InvoiceFormNav
+          status={InvoiceStatus.None}
+          onCancel={onCancel}
+          onSave={() => handleFormSave('Send')}
+          onDraftSave={() => handleFormSave('Draft')}
+        />
       </Box>
     </Box>
   );

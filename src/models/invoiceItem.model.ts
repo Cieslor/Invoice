@@ -14,7 +14,7 @@ export type ItemFields = {
   price: number;
 };
 
-export interface InvoiceItem {
+export interface InvoiceItemWithValidation {
   fields: ItemFields & { totalPrice: number };
   validation: {
     itemName: Validation;

@@ -15,11 +15,11 @@ import {
 } from '@chakra-ui/react';
 import { useRecoilValue } from 'recoil';
 import { MdDelete } from 'react-icons/md';
-import { InvoiceItem } from 'models';
+import { InvoiceItemWithValidation } from 'models';
 import { showItemValidationErrors } from 'state';
 
 interface IListItemProps {
-  item: InvoiceItem;
+  item: InvoiceItemWithValidation;
   id: number;
   modifyItem: (index: number, key: 'itemName' | 'quantity' | 'price', value: string | number) => void;
   deleteItem: (index: number) => void;
