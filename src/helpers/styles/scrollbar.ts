@@ -24,7 +24,6 @@ export const transparentBgScrollbar = (color: string) => ({
   scrollbarWidth: 'thin',
   // webkit
   '&::-webkit-scrollbar-track': {
-    WebkitBoxShadow: 'inset 0 0 6px rgba(0,0,0,0.1)',
     backgroundColor: 'transparent',
     borderRadius: '4px',
   },

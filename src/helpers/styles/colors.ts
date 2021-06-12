@@ -15,4 +15,20 @@ export const colors = {
     selago: '#F9FAFE',
     oxfordBlue: '#373B53',
   },
+  statusBadges: {
+    pending: {
+      text: 'rgba(255, 143, 0, 1)',
+      bg: 'rgba(255, 143, 0, 0.06)',
+    },
+    draft: {
+      text: 'rgba(55, 59, 83, 1)',
+      bg: 'rgba(55, 59, 83, 0.06)',
+      darkText: 'rgba(223, 227, 250, 1)',
+      darkBg: 'rgba(223, 227, 250, 0.06)',
+    },
+    paid: {
+      text: 'rgba(51, 214, 159, 1)',
+      bg: 'rgba(51, 214, 159, 0.06)',
+    },
+  },
 };

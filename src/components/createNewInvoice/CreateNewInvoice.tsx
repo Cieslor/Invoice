@@ -40,8 +40,11 @@ export const CreateNewInvoice: FC = () => {
       createdAt: new Date(),
       status: InvoiceStatus.Draft,
     })
-      .then(() => console.log('success'))
-      .catch((error) => console.log(error));
+      .then(() => {
+        setShowNewInvoiceForm(false);
+        toast(successToast(t('InvoiceForm:INVOICE_SEND_SUCCESSFULLY')));
+      })
+      .catch(() => toast(errorToast(t('InvoiceForm:ERROR_SENDING_INVOICE'))));
   };
 
   return (

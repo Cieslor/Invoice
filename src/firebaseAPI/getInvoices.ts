@@ -1,5 +1,6 @@
 import { firestore } from 'firebaseAPI';
 import { InvoiceStatus, FirestoreDocument } from 'models';
+import { invoicesQueryLimit } from 'utilities';
 
 export const getInvoices = (userId: string, status: InvoiceStatus[], lastDoc?: FirestoreDocument) => {
   let query = firestore.collection('invoice').where('userUid', '==', userId);
@@ -13,5 +14,5 @@ export const getInvoices = (userId: string, status: InvoiceStatus[], lastDoc?: F
     query = query.startAfter(lastDoc);
   }
 
-  return query.limit(15).get();
+  return query.limit(invoicesQueryLimit).get();
 };
