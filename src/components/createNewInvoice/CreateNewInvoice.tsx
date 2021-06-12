@@ -42,9 +42,9 @@ export const CreateNewInvoice: FC = () => {
     })
       .then(() => {
         setShowNewInvoiceForm(false);
-        toast(successToast(t('InvoiceForm:INVOICE_SEND_SUCCESSFULLY')));
+        toast(successToast(t('InvoiceForm:INVOICE_SAVED_AS_DRAFT_SUCCESSFULLY')));
       })
-      .catch(() => toast(errorToast(t('InvoiceForm:ERROR_SENDING_INVOICE'))));
+      .catch(() => toast(errorToast(t('InvoiceForm:ERROR_SAVING_AS_DRAFT'))));
   };
 
   return (
