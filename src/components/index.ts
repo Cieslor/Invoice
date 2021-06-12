@@ -9,3 +9,5 @@ export * from './profile';
 export * from './avatarPicker';
 export * from './formSlideInContainer';
 export * from './createNewInvoice';
+export * from './invoiceList';
+export * from './invoiceStatusFilter';

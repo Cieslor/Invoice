@@ -8,6 +8,7 @@ import SignUp from './en/signUp.json';
 import SignIn from './en/signIn.json';
 import Profile from './en/profile.json';
 import InvoiceForm from './en/invoiceForm.json';
+import InvoiceList from './en/invoiceList.json';
 import { buildYupLocale } from 'i18n';
 
 export const resources = {
@@ -18,6 +19,7 @@ export const resources = {
     SignIn,
     Profile,
     InvoiceForm,
+    InvoiceList,
   },
 } as const;
 
@@ -29,7 +31,7 @@ i18n
     {
       lng: 'en',
       fallbackLng: 'en',
-      ns: ['Common', 'Validation', 'SignUp', 'SignIn', 'Profile', 'InvoiceForm'],
+      ns: ['Common', 'Validation', 'SignUp', 'SignIn', 'Profile', 'InvoiceForm', 'InvoiceList'],
       defaultNS: 'Common',
       debug: false,
       interpolation: {
