@@ -15,6 +15,7 @@ export const useGetPaginatedInvoices = (userUid: string, status: InvoiceStatus[]
       },
       enabled: Boolean(userUid),
       staleTime: Infinity,
+      cacheTime: Infinity,
     }
   );
 };

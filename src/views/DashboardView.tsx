@@ -4,15 +4,7 @@ import { CreateNewInvoice, InvoiceList, InvoiceStatusFilter } from 'components';
 
 export const DashboardView: FC = () => {
   return (
-    <Flex
-      w="100%"
-      maxW="730px"
-      h="100%"
-      flexDirection="column"
-      ml={[2, 12, '120px']}
-      mr={[2, 12, 6, '120px']}
-      pt={[8, 14, 0]}
-    >
+    <Flex w="100%" maxW="730px" h="100%" flexDirection="column" ml={[2, 8, '120px']} mr={[2, 8, 6, '120px']}>
       <Flex justifyContent="space-between" alignItems="center" px={[4, 0]}>
         <Text as="h2" textStyle="h1">
           Invoices

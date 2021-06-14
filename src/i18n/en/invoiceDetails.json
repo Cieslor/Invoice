@@ -1,0 +1,13 @@
+{
+  "GO_BACK": "Go back",
+  "STATUS": "Status",
+  "INVOICE_DATE": "Invoice Date",
+  "PAYMENT_DUE": "Payment Due",
+  "BILL_TO": "Bill To",
+  "SENT_TO": "Sent To",
+  "ITEM_NAME": "Item Name",
+  "QTY": "QTY.",
+  "PRICE": "Price",
+  "TOTAL": "Total",
+  "GRAND_TOTAL": "Grand Total"
+}

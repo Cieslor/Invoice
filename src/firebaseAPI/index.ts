@@ -8,3 +8,4 @@ export * from './uploadAvatar';
 export * from './getInvoices';
 export * from './createInvoice';
 export * from './updateInvoice';
+export * from './getInvoice';

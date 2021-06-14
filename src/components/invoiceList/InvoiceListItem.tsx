@@ -17,7 +17,7 @@ export const InvoiceListItem: FC<IInvoiceListItemProps> = ({ id, data }) => {
   const { t } = useTranslation('InvoiceList');
 
   return (
-    <ChakraLink as={Link} to="/" w="100%" _hover={{ textDecoration: 'none' }}>
+    <ChakraLink as={Link} to={`/details/${id}`} w="100%" _hover={{ textDecoration: 'none' }}>
       <Grid
         templateColumns={{ base: '1fr 1fr', sm: '1fr 1fr', md: 'repeat(4, 1fr) auto' }}
         gap={[6, 2, 8]}
