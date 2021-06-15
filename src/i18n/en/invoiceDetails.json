@@ -17,5 +17,7 @@
   "DELETE_ERROR": "An error occured when deleting an invoice",
   "CONFIRM_DELETION": "Confirm Deletion",
   "DELETION_DIALOG": "Are you sure you want to delete invoice #{{id}}? This action cannot be undone.",
-  "CANCEL": "Cancel"
+  "CANCEL": "Cancel",
+  "MARK_AS_PAID_SUCCESS": "Invoice has been successfully Marked as Paid",
+  "MARK_AS_PAID_ERROR": "An error occured when trying to Mark as Paid"
 }

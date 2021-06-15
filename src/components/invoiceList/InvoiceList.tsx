@@ -16,10 +16,9 @@ export const InvoiceList: FC = () => {
     selectedFilters
   );
 
-  const invoices = data?.pages
-    .map((page) => page.docs)
-    .flat()
-    .map((item) => ({ id: item.id, data: item.data() }));
+  const invoices = data?.pages.flat();
+
+  const skeletonColorScheme = useColorModeValue('whiteAlpha', 'blackAlpha');
 
   return (
     <Box
@@ -36,20 +35,13 @@ export const InvoiceList: FC = () => {
           hasMore={!!hasNextPage}
           next={fetchNextPage}
           dataLength={invoices?.length ?? 0}
-          loader={
-            <Skeleton
-              h={['130px', '72px']}
-              mt={4}
-              borderRadius="6px"
-              colorScheme={useColorModeValue('whiteAlpha', 'blackAlpha')}
-            />
-          }
+          loader={<Skeleton h={['130px', '72px']} mt={4} borderRadius="6px" colorScheme={skeletonColorScheme} />}
           scrollableTarget="invoice-list-scrollable"
           style={{ height: '100%' }}
         >
           <VStack spacing={4}>
             {invoices?.map((invoice) => (
-              <InvoiceListItem key={invoice.id} id={invoice.id} data={invoice.data as InvoiceFromFirestore} />
+              <InvoiceListItem key={invoice.id} data={invoice as InvoiceFromFirestore} />
             ))}
           </VStack>
         </InfiniteScroll>
@@ -57,12 +49,7 @@ export const InvoiceList: FC = () => {
         <InvoiceListEmptyState />
       )}
       {(isLoading || isFetching) && (
-        <Skeleton
-          h={['130px', '72px']}
-          mt={4}
-          borderRadius="6px"
-          colorScheme={useColorModeValue('whiteAlpha', 'blackAlpha')}
-        />
+        <Skeleton h={['130px', '72px']} mt={4} borderRadius="6px" colorScheme={skeletonColorScheme} />
       )}
     </Box>
   );

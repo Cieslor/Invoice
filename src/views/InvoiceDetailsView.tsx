@@ -3,7 +3,6 @@ import { Flex, useColorModeValue, Box } from '@chakra-ui/react';
 import { useParams } from 'react-router-dom';
 import { InvoiceDetailsHeader, InvoiceDetailsDataPresentation, InvoiceDetailsActions } from 'components';
 import { useGetInvoice } from 'queries';
-import { InvoiceFromFirestore } from 'models';
 import { transparentBgScrollbar } from 'helpers';
 
 export const InvoiceDetailsView: FC = () => {
@@ -22,13 +21,9 @@ export const InvoiceDetailsView: FC = () => {
         px={[2, 2, 0]}
         sx={transparentBgScrollbar(useColorModeValue('invoice.lavenderWeb', 'invoice.ebonyClay'))}
       >
-        <InvoiceDetailsHeader id={id} status={data?.data()?.status} isLoading={isLoading || isFetching} />
-        <InvoiceDetailsDataPresentation
-          id={id}
-          data={data?.data() as InvoiceFromFirestore}
-          isLoading={isLoading || isFetching}
-        />
-        {!!data?.data()?.status && (
+        <InvoiceDetailsHeader id={id} status={data?.status} isLoading={isLoading || isFetching} />
+        <InvoiceDetailsDataPresentation id={id} data={data} isLoading={isLoading || isFetching} />
+        {!!data?.status && (
           <Flex
             position="fixed"
             left="0"
@@ -47,7 +42,7 @@ export const InvoiceDetailsView: FC = () => {
               },
             }}
           >
-            <InvoiceDetailsActions id={id} status={data?.data()?.status} />
+            <InvoiceDetailsActions id={id} status={data?.status} />
           </Flex>
         )}
       </Box>

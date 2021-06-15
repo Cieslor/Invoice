@@ -9,15 +9,14 @@ import { InvoiceFromFirestore } from 'models';
 import { InvoiceListItemStatusBadge } from 'components';
 
 interface IInvoiceListItemProps {
-  id: string;
   data: InvoiceFromFirestore;
 }
 
-export const InvoiceListItem: FC<IInvoiceListItemProps> = ({ id, data }) => {
+export const InvoiceListItem: FC<IInvoiceListItemProps> = ({ data }) => {
   const { t } = useTranslation('InvoiceList');
 
   return (
-    <ChakraLink as={Link} to={`/details/${id}`} w="100%" _hover={{ textDecoration: 'none' }}>
+    <ChakraLink as={Link} to={`/details/${data.id}`} w="100%" _hover={{ textDecoration: 'none' }}>
       <Grid
         templateColumns={{ base: '1fr 1fr', sm: '1fr 1fr', md: 'repeat(4, 1fr) auto' }}
         gap={[6, 2, 8]}
@@ -39,7 +38,7 @@ export const InvoiceListItem: FC<IInvoiceListItemProps> = ({ id, data }) => {
             <Box as="span" color={useColorModeValue('invoice.coolGrey', 'invoice.lavenderWeb')}>
               #
             </Box>
-            {id}
+            {data.id}
           </Text>
         </Box>
         <Box display={['none', 'none', 'block']}>

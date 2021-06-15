@@ -3,7 +3,7 @@ import { Wrap, Button, useToast, useDisclosure } from '@chakra-ui/react';
 import { useTranslation } from 'react-i18next';
 import { useHistory } from 'react-router-dom';
 import { InvoiceStatus } from 'models';
-import { useDeleteInvoice } from 'mutations';
+import { useDeleteInvoice, useMarkAsPaid } from 'mutations';
 import { successToast, errorToast } from 'helpers';
 import { DeletionModal } from 'components';
 
@@ -15,6 +15,7 @@ interface IInvoiceDetailsActionsProps {
 export const InvoiceDetailsActions: FC<IInvoiceDetailsActionsProps> = ({ id, status }) => {
   const { t } = useTranslation('InvoiceDetails');
   const { mutateAsync: deleteInvoice } = useDeleteInvoice();
+  const { mutateAsync: markAsPaid } = useMarkAsPaid();
   const history = useHistory();
 
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -29,15 +30,22 @@ export const InvoiceDetailsActions: FC<IInvoiceDetailsActionsProps> = ({ id, sta
       .catch(() => toast(errorToast(t('DELETE_ERROR'))));
   };
 
-  console.log(id, status);
+  const handleMarkAsPaid = async () => {
+    await markAsPaid(id)
+      .then(() => {
+        toast(successToast(t('MARK_AS_PAID_SUCCESS')));
+      })
+      .catch(() => toast(errorToast(t('MARK_AS_PAID_ERROR'))));
+  };
+
   return (
-    <Wrap w="100%" spacing={4} sx={{ '& > ul': { flexWrap: 'nowrap' } }}>
+    <Wrap w="100%" spacing={4} sx={{ '& > ul': { flexWrap: 'nowrap', justifyContent: 'flex-end' } }}>
       <Button variant="secondary">{t('EDIT')}</Button>
       <Button id="delete-invoice-button" variant="action-red" onClick={onOpen}>
         {t('DELETE')}
       </Button>
       {status === InvoiceStatus.Pending && (
-        <Button id="mark-as-paid-invoice-button" variant="primary">
+        <Button id="mark-as-paid-invoice-button" variant="primary" onClick={handleMarkAsPaid}>
           {t('MARK_AS_PAID')}
         </Button>
       )}

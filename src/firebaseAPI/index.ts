@@ -10,3 +10,4 @@ export * from './createInvoice';
 export * from './updateInvoice';
 export * from './getInvoice';
 export * from './deleteInvoice';
+export * from './markAsPaid';

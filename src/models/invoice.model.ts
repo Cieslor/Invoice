@@ -42,4 +42,5 @@ export interface Invoice extends InvoiceBillingInfo {
 export interface InvoiceFromFirestore extends Omit<Invoice, 'invoiceDate' | 'createdAt'> {
   invoiceDate: FirestoreTimestamp;
   createdAt: FirestoreTimestamp;
+  id: string;
 }
