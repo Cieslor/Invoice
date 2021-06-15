@@ -9,3 +9,4 @@ export * from './getInvoices';
 export * from './createInvoice';
 export * from './updateInvoice';
 export * from './getInvoice';
+export * from './deleteInvoice';

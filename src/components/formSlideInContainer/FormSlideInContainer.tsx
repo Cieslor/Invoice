@@ -1,11 +1,12 @@
 import React, { FC } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Box, useTheme, useColorMode, Icon, Text, Flex } from '@chakra-ui/react';
+import { Box, Icon, Text, Flex, useColorModeValue } from '@chakra-ui/react';
+import { useTranslation } from 'react-i18next';
 import { ReactComponent as ArrowBackIcon } from 'assets/icon-arrow-left.svg';
 
 interface IFormSlideInContainerProps {
   showContent: boolean;
-  close: () => void;
+  onClose: () => void;
 }
 
 const backdropVariants = {
@@ -30,12 +31,9 @@ const innerVariants = {
   },
 };
 
-export const FormSlideInContainer: FC<IFormSlideInContainerProps> = ({ children, showContent }) => {
-  const {
-    colors: { invoice },
-  } = useTheme();
-
-  const { colorMode } = useColorMode();
+export const FormSlideInContainer: FC<IFormSlideInContainerProps> = ({ children, showContent, onClose }) => {
+  const { t } = useTranslation('InvoiceForm');
+  const containerBg = useColorModeValue('white', 'invoice.xiketic');
 
   return (
     <Box
@@ -76,18 +74,18 @@ export const FormSlideInContainer: FC<IFormSlideInContainerProps> = ({ children,
               w="100%"
               maxW="720px"
               pt={[8, 14]}
-              pr={[1, 8]}
-              pl={[1, 8, '140px']}
-              bg={colorMode === 'dark' ? invoice.xiketic : 'white'}
+              pr={[2, 8]}
+              pl={[2, 8, '140px']}
+              bg={containerBg}
               borderRadius={[0, '0 20px 20px 0']}
               overflow="hidden"
               zIndex={1}
             >
               <Box mb={6} display={['block', 'none']}>
-                <Flex display="inline-flex" alignItems="center" onClick={close} cursor="pointer">
+                <Flex display="inline-flex" alignItems="center" onClick={onClose} cursor="pointer">
                   <Icon as={ArrowBackIcon} h={3} w={3} />
                   <Text textStyle="h4" ml={4}>
-                    Go back
+                    {t('GO_BACK')}
                   </Text>
                 </Flex>
               </Box>

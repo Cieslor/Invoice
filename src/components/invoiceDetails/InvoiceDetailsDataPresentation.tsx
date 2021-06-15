@@ -21,7 +21,7 @@ export const InvoiceDetailsDataPresentation: FC<IInvoiceDetailsDataPresentationP
         w="100%"
         flexDirection="column"
         p={[6, 8]}
-        mb={['150px', '150px', 8]}
+        mb={[8, 8, 0]}
         bg={useColorModeValue('white', 'invoice.spaceCadet')}
         boxShadow="0px 10px 10px -10px rgba(72, 84, 159, 0.100397)"
         borderRadius="0.5rem"

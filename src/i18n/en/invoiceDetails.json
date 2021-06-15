@@ -9,5 +9,13 @@
   "QTY": "QTY.",
   "PRICE": "Price",
   "TOTAL": "Total",
-  "GRAND_TOTAL": "Grand Total"
+  "GRAND_TOTAL": "Grand Total",
+  "EDIT": "Edit",
+  "DELETE": "Delete",
+  "MARK_AS_PAID": "Mark as Paid",
+  "DELETE_SUCCESS": "Invoice has been successfully deleted",
+  "DELETE_ERROR": "An error occured when deleting an invoice",
+  "CONFIRM_DELETION": "Confirm Deletion",
+  "DELETION_DIALOG": "Are you sure you want to delete invoice #{{id}}? This action cannot be undone.",
+  "CANCEL": "Cancel"
 }

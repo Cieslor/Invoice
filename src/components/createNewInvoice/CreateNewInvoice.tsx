@@ -11,6 +11,7 @@ import { errorToast, successToast } from 'helpers';
 
 export const CreateNewInvoice: FC = () => {
   const [showNewInvoiceForm, setShowNewInvoiceForm] = useState<boolean>(false);
+  const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
   const { t } = useTranslation(['Common', 'InvoiceForm']);
   const toast = useToast();
   const user = useRecoilValue(currentUser);
@@ -18,6 +19,7 @@ export const CreateNewInvoice: FC = () => {
   const { mutateAsync: createNew } = useCreateInvoice();
 
   const onSaveAndSend = async (billingInfo: InvoiceBillingInfo, invoiceItems: InvoiceItem[]) => {
+    setIsSubmitting(true);
     await createNew({
       ...billingInfo,
       invoiceItems,
@@ -29,10 +31,12 @@ export const CreateNewInvoice: FC = () => {
         setShowNewInvoiceForm(false);
         toast(successToast(t('InvoiceForm:INVOICE_SEND_SUCCESSFULLY')));
       })
-      .catch(() => toast(errorToast(t('InvoiceForm:ERROR_SENDING_INVOICE'))));
+      .catch(() => toast(errorToast(t('InvoiceForm:ERROR_SENDING_INVOICE'))))
+      .finally(() => setIsSubmitting(false));
   };
 
   const onSaveAsDraft = async (billingInfo: InvoiceBillingInfo, invoiceItems: InvoiceItem[]) => {
+    setIsSubmitting(true);
     await createNew({
       ...billingInfo,
       invoiceItems,
@@ -44,7 +48,8 @@ export const CreateNewInvoice: FC = () => {
         setShowNewInvoiceForm(false);
         toast(successToast(t('InvoiceForm:INVOICE_SAVED_AS_DRAFT_SUCCESSFULLY')));
       })
-      .catch(() => toast(errorToast(t('InvoiceForm:ERROR_SAVING_AS_DRAFT'))));
+      .catch(() => toast(errorToast(t('InvoiceForm:ERROR_SAVING_AS_DRAFT'))))
+      .finally(() => setIsSubmitting(false));
   };
 
   return (
@@ -61,12 +66,13 @@ export const CreateNewInvoice: FC = () => {
         <Text display={['none', 'block']}>{t('Common:NEW_INVOICE')}</Text>
         <Text display={['block', 'none']}>{t('Common:NEW')}</Text>
       </Button>
-      <FormSlideInContainer showContent={showNewInvoiceForm} close={() => setShowNewInvoiceForm(false)}>
+      <FormSlideInContainer showContent={showNewInvoiceForm} onClose={() => setShowNewInvoiceForm(false)}>
         <InvoiceForm
           mode={InvoiceFormMode.New}
           onCancel={() => setShowNewInvoiceForm(false)}
           onSave={onSaveAndSend}
           onDraftSave={onSaveAsDraft}
+          isSubmitting={isSubmitting}
         />
       </FormSlideInContainer>
     </>

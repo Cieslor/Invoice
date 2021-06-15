@@ -3,7 +3,7 @@ import { Link as ChakraLink, Box, useColorModeValue, Icon, Flex, Text, Skeleton 
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { ReactComponent as ArrowBackIcon } from 'assets/icon-arrow-left.svg';
-import { InvoiceListItemStatusBadge } from 'components';
+import { InvoiceListItemStatusBadge, InvoiceDetailsActions } from 'components';
 import { InvoiceStatus } from 'models';
 
 interface IInvoiceDetailsHeaderProps {
@@ -14,8 +14,6 @@ interface IInvoiceDetailsHeaderProps {
 
 export const InvoiceDetailsHeader: FC<IInvoiceDetailsHeaderProps> = ({ id, status, isLoading }) => {
   const { t } = useTranslation('InvoiceDetails');
-
-  console.log(id);
 
   return (
     <Box mb={[4, 6]}>
@@ -45,11 +43,14 @@ export const InvoiceDetailsHeader: FC<IInvoiceDetailsHeaderProps> = ({ id, statu
           boxShadow="0px 10px 10px -10px rgba(72, 84, 159, 0.100397)"
           borderRadius="0.5rem"
         >
-          <Flex w={['100%', '50%']} justifyContent={['space-between', 'flex-start']} alignItems="center">
+          <Flex w={['100%', '100%', '50%']} justifyContent={['space-between', 'flex-start']} alignItems="center">
             <Text textStyle="body_1" mr={4} color={useColorModeValue('invoice.coolGrey', 'invoice.lavenderWeb')}>
               {t('STATUS')}
             </Text>
             {status && <InvoiceListItemStatusBadge status={status} />}
+          </Flex>
+          <Flex w="50%" display={['none', 'none', 'flex']}>
+            {status && <InvoiceDetailsActions id={id} status={status} />}
           </Flex>
         </Flex>
       </Skeleton>

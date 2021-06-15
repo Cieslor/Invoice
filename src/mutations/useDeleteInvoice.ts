@@ -1,10 +1,9 @@
 import { useMutation, useQueryClient } from 'react-query';
-import { createInvoice } from 'firebaseAPI';
-import { Invoice } from 'models';
+import { deleteInvoice } from 'firebaseAPI';
 
-export const useCreateInvoice = () => {
+export const useDeleteInvoice = () => {
   const queryClient = useQueryClient();
-  return useMutation((invoice: Invoice) => createInvoice(invoice), {
+  return useMutation((invoiceId: string) => deleteInvoice(invoiceId), {
     onSuccess: () => {
       queryClient.invalidateQueries('invoices');
     },

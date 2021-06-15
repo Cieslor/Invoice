@@ -34,6 +34,7 @@ interface IInvoiceFormProps {
   onCancel: () => void;
   onSave: (billingInfo: InvoiceBillingInfo, invoiceItems: InvoiceItem[]) => void;
   onDraftSave?: (billingInfo: InvoiceBillingInfo, invoiceItems: InvoiceItem[]) => void;
+  isSubmitting: boolean;
 }
 
 export const InvoiceForm: FC<IInvoiceFormProps> = ({
@@ -43,6 +44,7 @@ export const InvoiceForm: FC<IInvoiceFormProps> = ({
   onCancel,
   onSave,
   onDraftSave,
+  isSubmitting,
 }) => {
   const { t } = useTranslation('InvoiceForm');
   const setInvoiceItems = useSetRecoilState(invoiceItemsAtom);
@@ -276,6 +278,7 @@ export const InvoiceForm: FC<IInvoiceFormProps> = ({
           onCancel={onCancel}
           onSave={() => handleFormSave('Send')}
           onDraftSave={() => handleFormSave('Draft')}
+          isSubmitting={isSubmitting}
         />
       </Box>
     </Box>
