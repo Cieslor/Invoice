@@ -4,15 +4,15 @@ import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { ReactComponent as ArrowBackIcon } from 'assets/icon-arrow-left.svg';
 import { InvoiceListItemStatusBadge, InvoiceDetailsActions } from 'components';
-import { InvoiceStatus } from 'models';
+import { InvoiceFromFirestore } from 'models';
 
 interface IInvoiceDetailsHeaderProps {
   id: string;
-  status: InvoiceStatus | undefined;
+  data: InvoiceFromFirestore | undefined;
   isLoading: boolean;
 }
 
-export const InvoiceDetailsHeader: FC<IInvoiceDetailsHeaderProps> = ({ id, status, isLoading }) => {
+export const InvoiceDetailsHeader: FC<IInvoiceDetailsHeaderProps> = ({ id, data, isLoading }) => {
   const { t } = useTranslation('InvoiceDetails');
 
   return (
@@ -47,10 +47,10 @@ export const InvoiceDetailsHeader: FC<IInvoiceDetailsHeaderProps> = ({ id, statu
             <Text textStyle="body_1" mr={4} color={useColorModeValue('invoice.coolGrey', 'invoice.lavenderWeb')}>
               {t('STATUS')}
             </Text>
-            {status && <InvoiceListItemStatusBadge status={status} />}
+            {!!data?.status && <InvoiceListItemStatusBadge status={data.status} />}
           </Flex>
           <Flex w="50%" display={['none', 'none', 'flex']}>
-            {status && <InvoiceDetailsActions id={id} status={status} />}
+            {!!data && <InvoiceDetailsActions id={id} data={data} />}
           </Flex>
         </Flex>
       </Skeleton>

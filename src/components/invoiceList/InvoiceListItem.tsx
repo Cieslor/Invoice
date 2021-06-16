@@ -46,7 +46,7 @@ export const InvoiceListItem: FC<IInvoiceListItemProps> = ({ data }) => {
             <Box as="span" mr={1}>
               {t('DUE')}
             </Box>
-            {dayjs(data.invoiceDate.toDate()).format('D MMM YYYY')}
+            {dayjs(data.invoiceDate).format('D MMM YYYY')}
           </Text>
         </Box>
         <Box justifySelf={['end', 'end', 'normal']}>
@@ -64,7 +64,7 @@ export const InvoiceListItem: FC<IInvoiceListItemProps> = ({ data }) => {
             <Box as="span" mr={2}>
               {t('DUE')}
             </Box>
-            {dayjs(data.invoiceDate.toDate()).format('D MMM YYYY')}
+            {dayjs(data.invoiceDate).format('D MMM YYYY')}
           </Text>
           <Text
             fontSize="1rem"

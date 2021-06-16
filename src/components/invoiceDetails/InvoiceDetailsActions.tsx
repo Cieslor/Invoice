@@ -1,18 +1,18 @@
 import React, { FC } from 'react';
-import { Wrap, Button, useToast, useDisclosure } from '@chakra-ui/react';
+import { Flex, Button, useToast, useDisclosure, Box } from '@chakra-ui/react';
 import { useTranslation } from 'react-i18next';
 import { useHistory } from 'react-router-dom';
-import { InvoiceStatus } from 'models';
+import { InvoiceStatus, InvoiceFromFirestore } from 'models';
 import { useDeleteInvoice, useMarkAsPaid } from 'mutations';
 import { successToast, errorToast } from 'helpers';
-import { DeletionModal } from 'components';
+import { DeletionModal, EditInvoice } from 'components';
 
 interface IInvoiceDetailsActionsProps {
   id: string;
-  status: InvoiceStatus;
+  data: InvoiceFromFirestore;
 }
 
-export const InvoiceDetailsActions: FC<IInvoiceDetailsActionsProps> = ({ id, status }) => {
+export const InvoiceDetailsActions: FC<IInvoiceDetailsActionsProps> = ({ id, data }) => {
   const { t } = useTranslation('InvoiceDetails');
   const { mutateAsync: deleteInvoice } = useDeleteInvoice();
   const { mutateAsync: markAsPaid } = useMarkAsPaid();
@@ -39,17 +39,21 @@ export const InvoiceDetailsActions: FC<IInvoiceDetailsActionsProps> = ({ id, sta
   };
 
   return (
-    <Wrap w="100%" spacing={4} sx={{ '& > ul': { flexWrap: 'nowrap', justifyContent: 'flex-end' } }}>
-      <Button variant="secondary">{t('EDIT')}</Button>
-      <Button id="delete-invoice-button" variant="action-red" onClick={onOpen}>
+    <Flex w="100%" flexWrap="nowrap" justifyContent="flex-end">
+      {data.status !== InvoiceStatus.Paid && (
+        <Box mr={4} minW="60px">
+          <EditInvoice data={data} />
+        </Box>
+      )}
+      <Button id="delete-invoice-button" variant="action-red" onClick={onOpen} mr={4}>
         {t('DELETE')}
       </Button>
-      {status === InvoiceStatus.Pending && (
+      {data.status === InvoiceStatus.Pending && (
         <Button id="mark-as-paid-invoice-button" variant="primary" onClick={handleMarkAsPaid}>
           {t('MARK_AS_PAID')}
         </Button>
       )}
       <DeletionModal id={id} onDelete={handleInvoiceDelete} isOpen={isOpen} onClose={onClose} />
-    </Wrap>
+    </Flex>
   );
 };

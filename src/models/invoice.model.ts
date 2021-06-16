@@ -1,4 +1,4 @@
-import { ItemFields, FirestoreTimestamp } from 'models';
+import { ItemFields } from 'models';
 
 export enum InvoiceFormMode {
   New = 'New',
@@ -39,8 +39,6 @@ export interface Invoice extends InvoiceBillingInfo {
   createdAt: Date;
 }
 
-export interface InvoiceFromFirestore extends Omit<Invoice, 'invoiceDate' | 'createdAt'> {
-  invoiceDate: FirestoreTimestamp;
-  createdAt: FirestoreTimestamp;
+export interface InvoiceFromFirestore extends Invoice {
   id: string;
 }

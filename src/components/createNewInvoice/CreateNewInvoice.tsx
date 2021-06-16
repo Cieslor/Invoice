@@ -70,6 +70,7 @@ export const CreateNewInvoice: FC = () => {
         <InvoiceForm
           mode={InvoiceFormMode.New}
           onCancel={() => setShowNewInvoiceForm(false)}
+          status={InvoiceStatus.None}
           onSave={onSaveAndSend}
           onDraftSave={onSaveAsDraft}
           isSubmitting={isSubmitting}

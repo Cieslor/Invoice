@@ -18,7 +18,15 @@ export const getInvoices = (userId: string, status: InvoiceStatus[], lastDocCrea
     .limit(invoicesQueryLimit)
     .get()
     .then((querySnapshot) => {
-      return querySnapshot.docs.map((invoice) => ({ id: invoice.ref.id, ...invoice.data() } as InvoiceFromFirestore));
+      return querySnapshot.docs.map(
+        (invoice) =>
+          ({
+            id: invoice.ref.id,
+            ...invoice.data(),
+            invoiceDate: invoice.data().invoiceDate.toDate(),
+            createdAt: invoice.data().createdAt.toDate(),
+          } as InvoiceFromFirestore)
+      );
     })
     .catch((error) => {
       throw error;

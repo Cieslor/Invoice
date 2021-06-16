@@ -60,7 +60,7 @@ export const InvoiceDetailsDataPresentation: FC<IInvoiceDetailsDataPresentationP
                 {t('INVOICE_DATE')}
               </Text>
               <Text fontSize="15px" fontWeight={700} lineHeight="1.25rem" letterSpacing="-0.31px" whiteSpace="nowrap">
-                {dayjs(data?.invoiceDate.toDate()).format('D MMM YYYY')}
+                {dayjs(data?.invoiceDate).format('D MMM YYYY')}
               </Text>
             </Box>
             <Box>
@@ -68,7 +68,7 @@ export const InvoiceDetailsDataPresentation: FC<IInvoiceDetailsDataPresentationP
                 {t('PAYMENT_DUE')}
               </Text>
               <Text fontSize="15px" fontWeight={700} lineHeight="1.25rem" letterSpacing="-0.31px">
-                {dayjs(data?.invoiceDate.toDate()).add(14, 'day').format('D MMM YYYY')}
+                {dayjs(data?.invoiceDate).add(14, 'day').format('D MMM YYYY')}
               </Text>
             </Box>
           </WrapItem>

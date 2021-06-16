@@ -6,7 +6,15 @@ export const getInvoice = (invoiceId: string) => {
     .collection('invoice')
     .doc(invoiceId)
     .get()
-    .then((invoice) => invoice.data() as InvoiceFromFirestore)
+    .then(
+      (invoice) =>
+        ({
+          id: invoice.ref.id,
+          ...invoice.data(),
+          invoiceDate: invoice.data()?.invoiceDate.toDate(),
+          createdAt: invoice.data()?.createdAt.toDate(),
+        } as InvoiceFromFirestore)
+    )
     .catch((error) => {
       throw error;
     });

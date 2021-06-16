@@ -21,9 +21,9 @@ export const InvoiceDetailsView: FC = () => {
         px={[2, 2, 0]}
         sx={transparentBgScrollbar(useColorModeValue('invoice.lavenderWeb', 'invoice.ebonyClay'))}
       >
-        <InvoiceDetailsHeader id={id} status={data?.status} isLoading={isLoading || isFetching} />
+        <InvoiceDetailsHeader id={id} data={data} isLoading={isLoading || isFetching} />
         <InvoiceDetailsDataPresentation id={id} data={data} isLoading={isLoading || isFetching} />
-        {!!data?.status && (
+        {!!data && (
           <Flex
             position="fixed"
             left="0"
@@ -42,7 +42,7 @@ export const InvoiceDetailsView: FC = () => {
               },
             }}
           >
-            <InvoiceDetailsActions id={id} status={data?.status} />
+            <InvoiceDetailsActions id={id} data={data} />
           </Flex>
         )}
       </Box>
