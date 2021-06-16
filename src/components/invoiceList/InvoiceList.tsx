@@ -5,16 +5,17 @@ import { useTranslation } from 'react-i18next';
 import { useRecoilValue } from 'recoil';
 import { useGetPaginatedInvoices } from 'queries';
 import { transparentBgScrollbar } from 'helpers';
-import { selectedStatusFilters } from 'state';
+import { selectedStatusFilters, currentUser } from 'state';
 import { InvoiceListItem, InvoiceListEmptyState, ErrorAlert } from 'components';
 import { InvoiceFromFirestore } from 'models/invoice.model';
 
 export const InvoiceList: FC = () => {
   const selectedFilters = useRecoilValue(selectedStatusFilters);
+  const user = useRecoilValue(currentUser);
   const { t } = useTranslation('InvoiceList');
 
   const { data, hasNextPage, fetchNextPage, isLoading, isFetching, isError } = useGetPaginatedInvoices(
-    'rQby9VVrzAWrqNuLrhujBqV57JC3',
+    user?.uid!,
     selectedFilters
   );
 

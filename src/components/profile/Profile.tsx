@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { useHistory } from 'react-router-dom';
 import { BsFillPersonFill } from 'react-icons/bs';
 import { useRecoilValue } from 'recoil';
-import { logOut } from 'firebaseAPI';
+import { useLogout } from 'mutations';
 import { ProfileMenuItem } from 'components';
 import { userPhotoUrl } from 'state';
 import { errorToast } from 'helpers';
@@ -17,11 +17,12 @@ export const Profile: FC = () => {
 
   const userAvatarUrl = useRecoilValue(userPhotoUrl);
 
+  const { mutateAsync: logout } = useLogout();
+
   const handleLogout = async () => {
-    await logOut()
-      .then(() => history.push('/signin'))
-      .catch(() => toast(errorToast(t('LOG_OUT_ERROR'))));
+    await logout().catch(() => toast(errorToast(t('LOG_OUT_ERROR'))));
   };
+
   return (
     <Menu autoSelect={false} placement="right-start">
       <MenuButton

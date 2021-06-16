@@ -3,5 +3,6 @@
   "PROFILE": "Profile",
   "AVATAR": "Avatar",
   "AVATAR_UPLOAD_ERROR": "An error occured during upload of selected avatar",
-  "LOG_OUT_ERROR": "An error occurred while attempting to logout"
+  "LOG_OUT_ERROR": "An error occurred while attempting to logout",
+  "SAVE": "Save"
 }
