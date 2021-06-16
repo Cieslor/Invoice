@@ -24,7 +24,7 @@ export interface InvoiceBillingInfo {
   toPostCode: string;
   toCountry: string;
   invoiceDate: Date;
-  paymentTerms: string;
+  paymentTerms: number;
   projectDescription: string;
 }
 

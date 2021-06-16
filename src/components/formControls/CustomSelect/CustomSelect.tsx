@@ -11,7 +11,7 @@ interface ICustomSelectProps {
   onChange: (value: string | number) => void;
   onBlur: (value: string) => void;
   name: string;
-  value?: string;
+  value?: string | number;
   placeholder?: string;
 }
 

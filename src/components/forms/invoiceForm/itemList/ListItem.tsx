@@ -45,7 +45,7 @@ export const ListItem: FC<IListItemProps> = ({ item, id, modifyItem, deleteItem 
             min={1}
             precision={0}
             onChange={(_, value) => modifyItem(id, 'quantity', Number.isNaN(value) ? '' : value)}
-            value={fields.quantity ?? 0}
+            value={fields.quantity}
           >
             <NumberInputField />
           </NumberInput>
@@ -58,7 +58,7 @@ export const ListItem: FC<IListItemProps> = ({ item, id, modifyItem, deleteItem 
             min={0.01}
             precision={2}
             onChange={(_, value) => modifyItem(id, 'price', Number.isNaN(value) ? '' : value)}
-            value={fields.price ?? 0}
+            value={fields.price}
           >
             <NumberInputField />
           </NumberInput>
