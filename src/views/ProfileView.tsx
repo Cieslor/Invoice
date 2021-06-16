@@ -2,6 +2,7 @@ import React, { FC, useState } from 'react';
 import { Box, Text, VStack, Flex, Button, Icon, useToast } from '@chakra-ui/react';
 import { RiSaveFill } from 'react-icons/ri';
 import { useTranslation } from 'react-i18next';
+import { Helmet } from 'react-helmet';
 import { useRecoilState } from 'recoil';
 import { useHistory } from 'react-router-dom';
 import { currentUser } from 'state';
@@ -45,6 +46,9 @@ export const ProfileView: FC = () => {
 
   return (
     <Box w="100%" maxW="730px" mx={[6, 12, '120px']}>
+      <Helmet>
+        <title>{t('TITLE')}</title>
+      </Helmet>
       <Flex justifyContent="space-between" alignItems="center">
         <Box>
           <Text as="h2" textStyle="h1" mb={2}>

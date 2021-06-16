@@ -1,4 +1,5 @@
 {
+  "TITLE": "Invoice - Details of #{{id}}",
   "GO_BACK": "Go back",
   "STATUS": "Status",
   "INVOICE_DATE": "Invoice Date",

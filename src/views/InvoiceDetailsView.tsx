@@ -1,5 +1,6 @@
 import React, { FC } from 'react';
 import { Flex, useColorModeValue, Box } from '@chakra-ui/react';
+import { Helmet } from 'react-helmet';
 import { useParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { InvoiceDetailsHeader, InvoiceDetailsDataPresentation, InvoiceDetailsActions, ErrorAlert } from 'components';
@@ -16,6 +17,9 @@ export const InvoiceDetailsView: FC = () => {
 
   return (
     <Flex w="100%" maxW="730px" h="100%" flexDirection="column" ml={[0, 4, '120px']} mr={[0, 4, 4, '120px']} px={2}>
+      <Helmet>
+        <title>{t('TITLE', { id })}</title>
+      </Helmet>
       <Box
         h="100%"
         overflow="auto"

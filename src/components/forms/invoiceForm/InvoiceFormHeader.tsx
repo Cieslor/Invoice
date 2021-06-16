@@ -1,6 +1,7 @@
 import React, { FC } from 'react';
 import { Text, Flex, Box } from '@chakra-ui/react';
 import { useTranslation } from 'react-i18next';
+import { Helmet } from 'react-helmet';
 import { InvoiceFormMode } from 'models';
 
 interface IInvoiceFormHeaderProps {
@@ -13,11 +14,19 @@ export const InvoiceFormHeader: FC<IInvoiceFormHeaderProps> = ({ mode, id }) => 
   return (
     <>
       {mode === InvoiceFormMode.New ? (
-        <Text as="h2" textStyle="h2_bigger" mb={[6, 12]}>
-          {t('NEW_INVOICE')}
-        </Text>
+        <>
+          <Helmet>
+            <title>{t('TITLE_NEW')}</title>
+          </Helmet>
+          <Text as="h2" textStyle="h2_bigger" mb={[6, 12]}>
+            {t('NEW_INVOICE')}
+          </Text>
+        </>
       ) : (
         <Flex alignItems="center" mb={[6, 12]}>
+          <Helmet>
+            <title>{t('TITLE_EDIT', { id })}</title>
+          </Helmet>
           <Text as="h2" textStyle="h2_bigger" mr={2}>
             {t('EDIT')}
           </Text>
