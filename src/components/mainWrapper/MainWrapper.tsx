@@ -10,7 +10,7 @@ export const MainWrapper: FC = ({ children }) => {
       overflow="auto"
       justifyContent="center"
       alignItems="flex-start"
-      pt={['70px', '80px', '72px']}
+      pt={['102px', '136px', '72px']}
     >
       <SideBar />
       {children}

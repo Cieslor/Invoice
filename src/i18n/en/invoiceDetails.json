@@ -1,0 +1,23 @@
+{
+  "GO_BACK": "Go back",
+  "STATUS": "Status",
+  "INVOICE_DATE": "Invoice Date",
+  "PAYMENT_DUE": "Payment Due",
+  "BILL_TO": "Bill To",
+  "SENT_TO": "Sent To",
+  "ITEM_NAME": "Item Name",
+  "QTY": "QTY.",
+  "PRICE": "Price",
+  "TOTAL": "Total",
+  "GRAND_TOTAL": "Grand Total",
+  "EDIT": "Edit",
+  "DELETE": "Delete",
+  "MARK_AS_PAID": "Mark as Paid",
+  "DELETE_SUCCESS": "Invoice has been successfully deleted",
+  "DELETE_ERROR": "An error occured when deleting an invoice",
+  "CONFIRM_DELETION": "Confirm Deletion",
+  "DELETION_DIALOG": "Are you sure you want to delete invoice #{{id}}? This action cannot be undone.",
+  "CANCEL": "Cancel",
+  "MARK_AS_PAID_SUCCESS": "Invoice has been successfully Marked as Paid",
+  "MARK_AS_PAID_ERROR": "An error occured when trying to Mark as Paid"
+}

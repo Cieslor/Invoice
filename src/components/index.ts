@@ -11,3 +11,5 @@ export * from './formSlideInContainer';
 export * from './createNewInvoice';
 export * from './invoiceList';
 export * from './invoiceStatusFilter';
+export * from './invoiceDetails';
+export * from './editInvoice';

@@ -11,10 +11,11 @@ export const useGetPaginatedInvoices = (userUid: string, status: InvoiceStatus[]
     },
     {
       getNextPageParam: (lastPage) => {
-        return lastPage.docs.length < invoicesQueryLimit ? undefined : lastPage.docs[lastPage.docs.length - 1];
+        return lastPage.length < invoicesQueryLimit ? undefined : lastPage[lastPage.length - 1].createdAt;
       },
       enabled: Boolean(userUid),
       staleTime: Infinity,
+      cacheTime: Infinity,
     }
   );
 };

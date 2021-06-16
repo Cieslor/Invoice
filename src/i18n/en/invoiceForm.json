@@ -33,5 +33,8 @@
   "ERROR_SENDING_INVOICE": "An error occured when creating an invoice",
   "ERROR_SAVING_AS_DRAFT": "An error occured when saving an invoice as Draft",
   "DAYS_WITH_COUNT": "Net {{count}} Day",
-  "DAYS_WITH_COUNT_plural": "Net {{count}} Days"
+  "DAYS_WITH_COUNT_plural": "Net {{count}} Days",
+  "GO_BACK": "Go back",
+  "INVOICE_EDITED_SUCCESSFULLY": "Changes has been successfully saved",
+  "ERROR_EDITING_INVOICE": "An error occured when saving changes"
 }

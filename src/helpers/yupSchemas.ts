@@ -34,6 +34,6 @@ export const invoiceBillingInfoYupSchema = () =>
     toPostCode: yup.string().required(),
     toCountry: yup.string().required(),
     invoiceDate: yup.date().required(),
-    paymentTerms: yup.string().required(),
+    paymentTerms: yup.number().required(),
     projectDescription: yup.string().required(),
   });

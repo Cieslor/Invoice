@@ -44,7 +44,7 @@ export const ProfileView: FC = () => {
   };
 
   return (
-    <Box w="100%" maxW="730px" mx={[6, 12, '120px']} pt={[8, 14, 0]}>
+    <Box w="100%" maxW="730px" mx={[6, 12, '120px']}>
       <Flex justifyContent="space-between" alignItems="center">
         <Box>
           <Text as="h2" textStyle="h1" mb={2}>

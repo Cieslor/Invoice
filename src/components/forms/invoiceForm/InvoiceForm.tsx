@@ -28,21 +28,27 @@ import { InvoiceFormMode, InvoiceBillingInfo, InvoiceStatus, ItemFields, Invoice
 import { emptyInvoiceBillingInfo } from 'utilities';
 import { invoiceBillingInfoYupSchema, transparentBgScrollbar, errorToast, invoiceFormPaymentTerms } from 'helpers';
 interface IInvoiceFormProps {
+  id?: string;
   mode: InvoiceFormMode;
+  status: InvoiceStatus;
   defaultValues?: InvoiceBillingInfo;
   invoiceItems?: ItemFields[];
   onCancel: () => void;
   onSave: (billingInfo: InvoiceBillingInfo, invoiceItems: InvoiceItem[]) => void;
   onDraftSave?: (billingInfo: InvoiceBillingInfo, invoiceItems: InvoiceItem[]) => void;
+  isSubmitting: boolean;
 }
 
 export const InvoiceForm: FC<IInvoiceFormProps> = ({
+  id,
   mode,
+  status,
   defaultValues,
   invoiceItems,
   onCancel,
   onSave,
   onDraftSave,
+  isSubmitting,
 }) => {
   const { t } = useTranslation('InvoiceForm');
   const setInvoiceItems = useSetRecoilState(invoiceItemsAtom);
@@ -99,7 +105,7 @@ export const InvoiceForm: FC<IInvoiceFormProps> = ({
         overflowY="auto"
         sx={transparentBgScrollbar(useColorModeValue('invoice.lavenderWeb', 'invoice.ebonyClay'))}
       >
-        <InvoiceFormHeader mode={mode} />
+        <InvoiceFormHeader mode={mode} id={id} />
         <VStack spacing={6} alignItems="flex-start" mb={[10, 12]}>
           <Text as="h3" textStyle="h4" color="invoice.mediumSlateBlue">
             {t('BILL_FROM')}
@@ -272,10 +278,11 @@ export const InvoiceForm: FC<IInvoiceFormProps> = ({
         bg={useColorModeValue('white', 'invoice.xiketic')}
       >
         <InvoiceFormNav
-          status={InvoiceStatus.None}
+          status={status}
           onCancel={onCancel}
           onSave={() => handleFormSave('Send')}
           onDraftSave={() => handleFormSave('Draft')}
+          isSubmitting={isSubmitting}
         />
       </Box>
     </Box>

@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { useRecoilValue } from 'recoil';
 import { isUserLoaded } from 'state';
 import { useAuthStateChanged } from 'firebaseAPI';
-import { SignUpView, DashboardView, SignInView, ProfileView } from 'views';
+import { SignUpView, DashboardView, SignInView, ProfileView, InvoiceDetailsView } from 'views';
 import { ProtectedRoute, MainWrapper } from 'components';
 
 const App = () => {
@@ -33,6 +33,14 @@ const App = () => {
               component={() => (
                 <MainWrapper>
                   <ProfileView />
+                </MainWrapper>
+              )}
+            />
+            <ProtectedRoute
+              path="/details/:id"
+              component={() => (
+                <MainWrapper>
+                  <InvoiceDetailsView />
                 </MainWrapper>
               )}
             />

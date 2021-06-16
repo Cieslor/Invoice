@@ -10,6 +10,9 @@ interface IInvoiceListItemStatusBadgeProps {
 export const InvoiceListItemStatusBadge: FC<IInvoiceListItemStatusBadgeProps> = ({ status }) => {
   const { t } = useTranslation('InvoiceList');
 
+  const draftBgColor = useColorModeValue('statusBadges.draft.bg', 'statusBadges.draft.darkBg');
+  const draftTextColor = useColorModeValue('statusBadges.draft.text', 'statusBadges.draft.darkText');
+
   let statusText = '';
   let bgColor = '';
   let textColor = '';
@@ -27,8 +30,8 @@ export const InvoiceListItemStatusBadge: FC<IInvoiceListItemStatusBadgeProps> = 
       break;
     case InvoiceStatus.Draft:
       statusText = t('DRAFT');
-      bgColor = useColorModeValue('statusBadges.draft.bg', 'statusBadges.draft.darkBg');
-      textColor = useColorModeValue('statusBadges.draft.text', 'statusBadges.draft.darkText');
+      bgColor = draftBgColor;
+      textColor = draftTextColor;
       break;
   }
 

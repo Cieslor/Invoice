@@ -7,8 +7,8 @@ interface ICustomSelectProps {
   label: string;
   isInvalid?: boolean;
   errorText?: string;
-  options: { value: string; label: string }[];
-  onChange: (value: string) => void;
+  options: { value: string | number; label: string }[];
+  onChange: (value: string | number) => void;
   onBlur: (value: string) => void;
   name: string;
   value?: string;

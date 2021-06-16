@@ -10,6 +10,6 @@ export const emptyInvoiceBillingInfo = {
   toPostCode: '',
   toCountry: '',
   invoiceDate: new Date(),
-  paymentTerms: '',
+  paymentTerms: undefined,
   projectDescription: '',
 };

@@ -1,1 +1,1 @@
-export const invoicesQueryLimit = 35;
+export const invoicesQueryLimit = 10;
