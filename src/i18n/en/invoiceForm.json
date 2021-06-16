@@ -1,4 +1,6 @@
 {
+  "TITLE_NEW": "Invoice - Create New",
+  "TITLE_EDIT": "Invoice - Edit #{{id}}",
   "EDIT": "Edit",
   "NEW_INVOICE": "New Invoice",
   "BILL_FROM": "Bill From",
