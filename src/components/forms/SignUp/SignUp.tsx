@@ -15,13 +15,10 @@ import {
   Text,
   Link as ChakraLink,
 } from '@chakra-ui/react';
-import { Link, useHistory } from 'react-router-dom';
-import { useSetRecoilState } from 'recoil';
+import { Link } from 'react-router-dom';
 import { ErrorAlert } from 'components';
-import { createUser } from 'firebaseAPI';
-import { SignInAndUpResponse } from 'models';
-import { currentUser } from 'state';
 import { signUpYupSchema } from 'helpers';
+import { useSignUp } from 'mutations';
 
 interface ISignUpFormData {
   email: string;
@@ -50,29 +47,13 @@ export const SignUp: FC = () => {
 
   const clearError = () => setError('');
 
-  const history = useHistory();
-
-  const setCurrentUser = useSetRecoilState(currentUser);
+  const { mutateAsync: signUp } = useSignUp();
 
   const onSubmit = async (data: ISignUpFormData, e: BaseSyntheticEvent | undefined) => {
     e?.preventDefault();
     const { email, password } = data;
 
-    await createUser(email, password)
-      .then((data: SignInAndUpResponse) => {
-        const { user } = data;
-        if (user) {
-          setCurrentUser({
-            email: user.email ?? '',
-            photoURL: user.photoURL ?? '',
-            uid: user.uid ?? '',
-          });
-        } else {
-          setCurrentUser(null);
-        }
-      })
-      .then(() => history.push('/'))
-      .catch((error: { code: string; message: string }) => setError(error.code));
+    await signUp({ email, password }).catch((error: { code: string; message: string }) => setError(error.code));
   };
 
   return (

@@ -15,13 +15,10 @@ import {
   Text,
   Link as ChakraLink,
 } from '@chakra-ui/react';
-import { useHistory, Link } from 'react-router-dom';
-import { useSetRecoilState } from 'recoil';
+import { Link } from 'react-router-dom';
 import { ErrorAlert } from 'components';
-import { signIn } from 'firebaseAPI';
-import { SignInAndUpResponse } from 'models';
-import { currentUser } from 'state';
 import { signInYupSchema } from 'helpers';
+import { useSignIn } from 'mutations';
 
 interface ISignInFormData {
   email: string;
@@ -48,27 +45,11 @@ export const SignIn: FC = () => {
 
   const clearError = () => setError('');
 
-  const history = useHistory();
-
-  const setCurrentUser = useSetRecoilState(currentUser);
+  const { mutateAsync: signIn } = useSignIn();
 
   const onSubmit = async (data: ISignInFormData) => {
     const { email, password } = data;
-    await signIn(email, password)
-      .then((data: SignInAndUpResponse) => {
-        const { user } = data;
-        if (user) {
-          setCurrentUser({
-            email: user.email ?? '',
-            photoURL: user.photoURL ?? '',
-            uid: user.uid ?? '',
-          });
-          history.push('/');
-        } else {
-          setCurrentUser(null);
-        }
-      })
-      .catch((error: { code: string; message: string }) => setError(error.code));
+    await signIn({ email, password }).catch((error: { code: string; message: string }) => setError(error.code));
   };
 
   return (

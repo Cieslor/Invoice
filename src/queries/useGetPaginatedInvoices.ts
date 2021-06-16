@@ -5,7 +5,7 @@ import { invoicesQueryLimit } from 'utilities';
 
 export const useGetPaginatedInvoices = (userUid: string, status: InvoiceStatus[]) => {
   return useInfiniteQuery(
-    ['invoices', ...status],
+    ['invoices', ...status, userUid],
     ({ pageParam }) => {
       return getInvoices.apply(null, [userUid, status, pageParam]);
     },

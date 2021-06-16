@@ -65,7 +65,7 @@ export const ProfileView: FC = () => {
               </Flex>
             }
           >
-            Save
+            {t('SAVE')}
           </Button>
         )}
       </Flex>
