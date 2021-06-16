@@ -1,14 +1,16 @@
 import React, { FC } from 'react';
 import { Flex, useColorModeValue, Box } from '@chakra-ui/react';
 import { useParams } from 'react-router-dom';
-import { InvoiceDetailsHeader, InvoiceDetailsDataPresentation, InvoiceDetailsActions } from 'components';
+import { useTranslation } from 'react-i18next';
+import { InvoiceDetailsHeader, InvoiceDetailsDataPresentation, InvoiceDetailsActions, ErrorAlert } from 'components';
 import { useGetInvoice } from 'queries';
 import { transparentBgScrollbar } from 'helpers';
 
 export const InvoiceDetailsView: FC = () => {
   const { id } = useParams<{ id: string }>();
+  const { t } = useTranslation('InvoiceDetails');
 
-  const { data, isLoading, isFetching } = useGetInvoice(id);
+  const { data, isLoading, isFetching, isError } = useGetInvoice(id);
 
   const actionsContainerBg = useColorModeValue('white', 'invoice.spaceCadet');
 
@@ -21,8 +23,12 @@ export const InvoiceDetailsView: FC = () => {
         px={[2, 2, 0]}
         sx={transparentBgScrollbar(useColorModeValue('invoice.lavenderWeb', 'invoice.ebonyClay'))}
       >
-        <InvoiceDetailsHeader id={id} data={data} isLoading={isLoading || isFetching} />
-        <InvoiceDetailsDataPresentation id={id} data={data} isLoading={isLoading || isFetching} />
+        <InvoiceDetailsHeader id={id} data={data} isLoading={isLoading || isFetching} isError={isError} />
+        {isError ? (
+          <ErrorAlert>{t('DETAILS_ERROR')}</ErrorAlert>
+        ) : (
+          <InvoiceDetailsDataPresentation id={id} data={data} isLoading={isLoading || isFetching} />
+        )}
         {!!data && (
           <Flex
             position="fixed"
