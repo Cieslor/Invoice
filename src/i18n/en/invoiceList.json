@@ -4,5 +4,6 @@
   "DRAFT": "Draft",
   "PAID": "Paid",
   "THERE_IS_NOTHING": "There is nothing here",
-  "CREATE_A_NEW_INVOICE": "Create a new invoice by clicking the <1>New Invoice</1> button and get started"
+  "CREATE_A_NEW_INVOICE": "Create a new invoice by clicking the <1>New Invoice</1> button and get started",
+  "ERROR": "An error occured during fetching an invoices"
 }
