@@ -2,7 +2,7 @@ import React, { FC, useState } from 'react';
 import { Button, useToast } from '@chakra-ui/react';
 import { useTranslation } from 'react-i18next';
 import { FormSlideInContainer, InvoiceForm } from 'components';
-import { InvoiceFormMode, InvoiceBillingInfo, InvoiceItem, InvoiceFromFirestore } from 'models';
+import { InvoiceFormMode, InvoiceBillingInfo, InvoiceItem, InvoiceFromFirestore, InvoiceStatus } from 'models';
 import { useUpdateInvoice } from 'mutations';
 import { errorToast, successToast } from 'helpers';
 
@@ -20,13 +20,14 @@ export const EditInvoice: FC<IEditInvoiceProps> = ({ data }) => {
 
   const { mutateAsync: edit } = useUpdateInvoice();
 
-  const handleEdit = async (billingInfo: InvoiceBillingInfo, invoiceItems: InvoiceItem[]) => {
+  const handleEdit = async (billingInfo: InvoiceBillingInfo, invoiceItems: InvoiceItem[], status: InvoiceStatus) => {
     setIsSubmitting(true);
     await edit({
       invoice: {
         ...rest,
         ...billingInfo,
         invoiceItems,
+        status,
       },
       documentId: rest.id,
     })
@@ -36,6 +37,14 @@ export const EditInvoice: FC<IEditInvoiceProps> = ({ data }) => {
       })
       .catch(() => toast(errorToast(t('InvoiceForm:ERROR_EDITING_INVOICE'))))
       .finally(() => setIsSubmitting(false));
+  };
+
+  const handlePendingEdit = (billingInfo: InvoiceBillingInfo, invoiceItems: InvoiceItem[]) => {
+    handleEdit(billingInfo, invoiceItems, InvoiceStatus.Pending);
+  };
+
+  const handleDraftEdit = (billingInfo: InvoiceBillingInfo, invoiceItems: InvoiceItem[]) => {
+    handleEdit(billingInfo, invoiceItems, InvoiceStatus.Draft);
   };
 
   return (
@@ -49,7 +58,8 @@ export const EditInvoice: FC<IEditInvoiceProps> = ({ data }) => {
           mode={InvoiceFormMode.Edit}
           status={rest.status}
           onCancel={() => setShowEditInvoiceForm(false)}
-          onSave={handleEdit}
+          onSave={handlePendingEdit}
+          onDraftSave={handleDraftEdit}
           isSubmitting={isSubmitting}
           invoiceItems={invoiceItems}
           defaultValues={rest}
